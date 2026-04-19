@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="2" viewBox="0 0 850 2">
+  <defs>
+    <linearGradient id="divGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a0a0f" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#7c3aed" stop-opacity="0.6">
+        <animate attributeName="stop-color" values="#7c3aed;#06b6d4;#ec4899;#7c3aed" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" stop-color="#06b6d4" stop-opacity="0.8">
+        <animate attributeName="stop-color" values="#06b6d4;#ec4899;#7c3aed;#06b6d4" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="80%" stop-color="#ec4899" stop-opacity="0.6">
+        <animate attributeName="stop-color" values="#ec4899;#7c3aed;#06b6d4;#ec4899" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="850" height="2" fill="url(#divGrad)" rx="1"/>
+</svg>

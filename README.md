@@ -1,296 +1,270 @@
-<!-- ═══════════════════════════════════════════════════════════════════════════════════════ -->
-<!-- ✦  Y O G E N D E R  —  G I T H U B   P R O F I L E  ✦                              -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════════════ -->
+<!-- ╔══════════════════════════════════════════════════════════════╗ -->
+<!-- ║  yogender-ai — A Profile Unlike Any Other                  ║ -->
+<!-- ╚══════════════════════════════════════════════════════════════╝ -->
 
 <div align="center">
-
-<!-- ─────────────── ANIMATED HEADER BANNER ─────────────── -->
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,25:161b22,50:6e40c9,75:238636,100:1f6feb&height=220&section=header&text=Yogender&fontSize=80&fontColor=ffffff&fontAlignY=35&desc=AI%20Engineer%20%E2%80%A2%20Full-Stack%20Developer%20%E2%80%A2%20Open%20Source%20Enthusiast&descSize=18&descColor=c9d1d9&descAlignY=55&animation=fadeIn" />
-
-<!-- ─────────────── TYPING SVG ─────────────── -->
+  <img src="./assets/header.svg" width="100%" alt="Yogender — AI Engineer · Full-Stack Developer · Creator" />
+</div>
 
 <br>
 
-<a href="https://github.com/yogender-ai">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=6E40C9&center=true&vCenter=true&multiline=true&repeat=true&random=false&width=800&height=100&lines=%E2%9C%A8+Welcome+to+my+Digital+Universe+%E2%9C%A8;Building+Intelligent+Systems+with+AI+%26+ML;Crafting+Beautiful+Experiences+with+Code;1%2C400%2B+Contributions+%7C+Infinite+Curiosity" alt="Typing SVG" />
-</a>
-
-<br>
-
-<!-- ─────────────── PROFILE BADGES ─────────────── -->
-
-<a href="https://github.com/yogender-ai?tab=followers">
-  <img src="https://img.shields.io/github/followers/yogender-ai?label=Followers&style=for-the-badge&logo=github&logoColor=white&labelColor=0d1117&color=6e40c9" />
-</a>
-&nbsp;
-<a href="https://github.com/yogender-ai?tab=repositories">
-  <img src="https://img.shields.io/badge/Repos-11+-6e40c9?style=for-the-badge&logo=github&logoColor=white&labelColor=0d1117" />
-</a>
-&nbsp;
-<a href="https://github.com/yogender-ai">
-  <img src="https://img.shields.io/badge/PRO-%E2%9C%93-238636?style=for-the-badge&logo=github&logoColor=white&labelColor=0d1117" />
-</a>
-&nbsp;
-<img src="https://komarev.com/ghpvc/?username=yogender-ai&style=for-the-badge&color=6e40c9&labelColor=0d1117&label=PROFILE+VIEWS" />
-
-</div>
-
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
-
-<!-- ═══════════════════════════════ ABOUT ME ═══════════════════════════════ -->
-
-<h2>
-  <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
-  &nbsp;About Me
-</h2>
-
-<img align="right" width="320" src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif" alt="Coding GIF" />
-
-```yaml
-name: Yogender
-located_in: India 🇮🇳
-current_focus: AI & Machine Learning
-education:
-  - "Computer Science & Engineering"
-
-fields_of_interest:
-  - "Artificial Intelligence"
-  - "Machine Learning & Deep Learning"
-  - "Full-Stack Web Development"
-  - "Neural Networks & Fuzzy Logic"
-  - "Physics Simulations"
-  - "Open Source Contribution"
-
-currently_working_on:
-  - "AI-Powered Directory Management"
-  - "Stock Market Prediction with Neural Networks"
-  - "Interactive Physics Simulations"
-
-fun_fact: >
-  "I believe code is the closest thing
-   we have to magic ✨"
-```
-
-<br clear="both">
-
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
-
-<!-- ═══════════════════════════════ TECH STACK ═══════════════════════════════ -->
-
-<h2>
-  <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="28">
-  &nbsp;Tech Arsenal
-</h2>
-
-<div align="center">
-
-<!-- Languages -->
-<h3>🔮 Languages</h3>
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=python,javascript,html,css,cpp,c,java,typescript&theme=dark&perline=8" alt="Languages" />
-</a>
-
-<br><br>
-
-<!-- Frameworks & Libraries -->
-<h3>⚡ Frameworks & Libraries</h3>
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,express,flask,tensorflow,pytorch,bootstrap&theme=dark&perline=8" alt="Frameworks" />
-</a>
-
-<br><br>
-
-<!-- Tools & Platforms -->
-<h3>🛠️ Tools & Platforms</h3>
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=git,github,vscode,docker,linux,mongodb,mysql,postman&theme=dark&perline=8" alt="Tools" />
-</a>
-
-<br><br>
-
-<!-- Cloud & DevOps -->
-<h3>☁️ Cloud & DevOps</h3>
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=aws,gcp,vercel,netlify,heroku,nginx,bash,powershell&theme=dark&perline=8" alt="Cloud" />
-</a>
-
-</div>
-
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
-
-<!-- ═══════════════════════════════ GITHUB STATS ═══════════════════════════════ -->
-
-<h2>
-  <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="28">
-  &nbsp;GitHub Analytics
-</h2>
-
-<div align="center">
-
-<!-- Stats Card + Streak Side by Side -->
-<a href="https://github.com/yogender-ai">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=yogender-ai&show_icons=true&theme=github_dark&bg_color=0d1117&title_color=6e40c9&icon_color=238636&text_color=c9d1d9&border_color=30363d&include_all_commits=true&count_private=true&hide_border=false&ring_color=6e40c9" />
-</a>
-&nbsp;&nbsp;
-<a href="https://github.com/yogender-ai">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yogender-ai&layout=compact&theme=github_dark&bg_color=0d1117&title_color=6e40c9&text_color=c9d1d9&border_color=30363d&hide_border=false&langs_count=8" />
-</a>
-
-<br><br>
-
-<!-- Streak Stats -->
-<a href="https://github.com/yogender-ai">
-  <img width="70%" src="https://github-readme-streak-stats.herokuapp.com?user=yogender-ai&theme=dark&background=0d1117&border=30363d&stroke=6e40c9&ring=6e40c9&fire=238636&currStreakNum=c9d1d9&sideNums=c9d1d9&currStreakLabel=6e40c9&sideLabels=6e40c9&dates=8b949e" />
-</a>
-
-<br><br>
-
-<!-- Activity Graph -->
-<a href="https://github.com/yogender-ai">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=yogender-ai&bg_color=0d1117&color=6e40c9&line=238636&point=c9d1d9&area_color=6e40c9&area=true&hide_border=true&custom_title=📈%20Contribution%20Graph" />
-</a>
-
-</div>
-
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
-
-<!-- ═══════════════════════════════ TROPHIES ═══════════════════════════════ -->
-
-<h2>
-  <img src="https://media.giphy.com/media/IdyAQJVN2kVPNUrojM/200.gif" width="28">
-  &nbsp;Trophies
-</h2>
+<!-- ━━━━━━━━━━━━━━━━━━━━ INTRO ━━━━━━━━━━━━━━━━━━━━ -->
 
 <div align="center">
   <a href="https://github.com/yogender-ai">
-    <img width="90%" src="https://github-profile-trophy.vercel.app/?username=yogender-ai&theme=discord&no-frame=true&no-bg=true&column=7&margin-w=10&margin-h=10" />
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=300&size=20&duration=4000&pause=2000&color=94A3B8&center=true&vCenter=true&repeat=true&width=600&height=45&lines=building+systems+that+think+%E2%80%A2+designing+experiences+that+inspire;1%2C400%2B+contributions+this+year+%E2%80%A2+always+shipping" alt="Typing SVG" />
   </a>
 </div>
 
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
+<br>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+<div align="center">
+  <img src="https://img.shields.io/github/followers/yogender-ai?style=flat&logo=github&logoColor=white&labelColor=0a0a0f&color=1a1a2e&label=followers" alt="Followers" />
+  &nbsp;&nbsp;
+  <img src="https://img.shields.io/github/stars/yogender-ai?style=flat&logo=github&logoColor=white&labelColor=0a0a0f&color=1a1a2e&label=stars&affiliations=OWNER" alt="Stars" />
+  &nbsp;&nbsp;
+  <img src="https://komarev.com/ghpvc/?username=yogender-ai&style=flat&color=1a1a2e&labelColor=0a0a0f&label=visitors" alt="Profile Views" />
+</div>
 
-<!-- ═══════════════════════════════ FEATURED PROJECTS ═══════════════════════════════ -->
+<br>
 
-<h2>
-  <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="28">
-  &nbsp;Featured Projects
-</h2>
+<img src="./assets/divider.svg" width="100%">
+
+<br>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━ ABOUT ━━━━━━━━━━━━━━━━━━━━ -->
+
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="50%" valign="top">
+
+### `> whoami`
+
+```
+┌──────────────────────────────────┐
+│                                  │
+│   Yogender                       │
+│   AI Engineer & Creator          │
+│   Based in India 🇮🇳              │
+│                                  │
+│   Building at the intersection   │
+│   of artificial intelligence     │
+│   and beautiful design.          │
+│                                  │
+│   I don't just write code —      │
+│   I architect experiences.       │
+│                                  │
+└──────────────────────────────────┘
+```
+
+</td>
+<td width="50%" valign="top">
+
+### `> cat interests.yml`
+
+```yaml
+currently_building:
+  → AI-Powered Directory Management
+  → Neural Network Stock Predictions
+  → Interactive Physics Simulations
+
+exploring:
+  → Generative AI & LLMs
+  → WebAssembly & Rust
+  → Real-time Data Visualization
+
+philosophy: |
+  "Make it work. Make it right.
+   Make it beautiful."
+```
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<img src="./assets/divider.svg" width="100%">
+
+<br>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━ TECH STACK ━━━━━━━━━━━━━━━━━━━━ -->
 
 <div align="center">
 
+### `⚙ tech.stack`
+
+<br>
+
+| Domain | Technologies |
+|:------:|:-------------|
+| **Languages** | ![Python](https://img.shields.io/badge/Python-0a0a0f?style=flat&logo=python&logoColor=3776AB) ![JavaScript](https://img.shields.io/badge/JavaScript-0a0a0f?style=flat&logo=javascript&logoColor=F7DF1E) ![TypeScript](https://img.shields.io/badge/TypeScript-0a0a0f?style=flat&logo=typescript&logoColor=3178C6) ![C++](https://img.shields.io/badge/C++-0a0a0f?style=flat&logo=cplusplus&logoColor=00599C) ![HTML5](https://img.shields.io/badge/HTML5-0a0a0f?style=flat&logo=html5&logoColor=E34F26) ![CSS3](https://img.shields.io/badge/CSS3-0a0a0f?style=flat&logo=css3&logoColor=1572B6) |
+| **AI / ML** | ![TensorFlow](https://img.shields.io/badge/TensorFlow-0a0a0f?style=flat&logo=tensorflow&logoColor=FF6F00) ![PyTorch](https://img.shields.io/badge/PyTorch-0a0a0f?style=flat&logo=pytorch&logoColor=EE4C2C) ![scikit‑learn](https://img.shields.io/badge/scikit--learn-0a0a0f?style=flat&logo=scikitlearn&logoColor=F7931E) ![OpenAI](https://img.shields.io/badge/OpenAI-0a0a0f?style=flat&logo=openai&logoColor=white) |
+| **Frontend** | ![React](https://img.shields.io/badge/React-0a0a0f?style=flat&logo=react&logoColor=61DAFB) ![Next.js](https://img.shields.io/badge/Next.js-0a0a0f?style=flat&logo=nextdotjs&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-0a0a0f?style=flat&logo=vite&logoColor=646CFF) ![Tailwind](https://img.shields.io/badge/Tailwind-0a0a0f?style=flat&logo=tailwindcss&logoColor=06B6D4) |
+| **Backend** | ![Node.js](https://img.shields.io/badge/Node.js-0a0a0f?style=flat&logo=nodedotjs&logoColor=5FA04E) ![Express](https://img.shields.io/badge/Express-0a0a0f?style=flat&logo=express&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-0a0a0f?style=flat&logo=flask&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-0a0a0f?style=flat&logo=fastapi&logoColor=009688) |
+| **Data** | ![MongoDB](https://img.shields.io/badge/MongoDB-0a0a0f?style=flat&logo=mongodb&logoColor=47A248) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0a0a0f?style=flat&logo=postgresql&logoColor=4169E1) ![Redis](https://img.shields.io/badge/Redis-0a0a0f?style=flat&logo=redis&logoColor=FF4438) |
+| **DevOps** | ![Docker](https://img.shields.io/badge/Docker-0a0a0f?style=flat&logo=docker&logoColor=2496ED) ![Git](https://img.shields.io/badge/Git-0a0a0f?style=flat&logo=git&logoColor=F05032) ![GitHub Actions](https://img.shields.io/badge/Actions-0a0a0f?style=flat&logo=githubactions&logoColor=2088FF) ![Vercel](https://img.shields.io/badge/Vercel-0a0a0f?style=flat&logo=vercel&logoColor=white) ![Render](https://img.shields.io/badge/Render-0a0a0f?style=flat&logo=render&logoColor=46E3B7) |
+
+</div>
+
+<br>
+
+<img src="./assets/divider.svg" width="100%">
+
+<br>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━ STATS ━━━━━━━━━━━━━━━━━━━━ -->
+
+<div align="center">
+
+### `📊 metrics`
+
+<br>
+
+<a href="https://github.com/yogender-ai">
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=yogender-ai&show_icons=true&include_all_commits=true&count_private=true&bg_color=0a0a0f&title_color=c4b5fd&icon_color=7c3aed&text_color=64748b&border_color=1e1b4b&hide_border=false&ring_color=7c3aed&rank_icon=percentile" />
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/yogender-ai">
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yogender-ai&layout=compact&bg_color=0a0a0f&title_color=c4b5fd&text_color=64748b&border_color=1e1b4b&hide_border=false&langs_count=8" />
+</a>
+
+<br><br>
+
+<a href="https://github.com/yogender-ai">
+  <img width="75%" src="https://github-readme-streak-stats.herokuapp.com?user=yogender-ai&background=0a0a0f&border=1e1b4b&stroke=1e1b4b&ring=7c3aed&fire=ec4899&currStreakNum=f1f5f9&sideNums=c4b5fd&currStreakLabel=7c3aed&sideLabels=64748b&dates=475569" />
+</a>
+
+<br><br>
+
+<a href="https://github.com/yogender-ai">
+  <img width="90%" src="https://github-readme-activity-graph.vercel.app/graph?username=yogender-ai&bg_color=0a0a0f&color=64748b&line=7c3aed&point=c4b5fd&area_color=7c3aed&area=true&hide_border=true&custom_title=%20" />
+</a>
+
+</div>
+
+<br>
+
+<img src="./assets/divider.svg" width="100%">
+
+<br>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━ PROJECTS ━━━━━━━━━━━━━━━━━━━━ -->
+
+<div align="center">
+
+### `🔬 featured.work`
+
+<br>
+
 <a href="https://github.com/yogender-ai/AI-Powered-Directory-Management-System">
-  <img width="47%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=AI-Powered-Directory-Management-System&theme=github_dark&bg_color=0d1117&title_color=6e40c9&icon_color=238636&text_color=c9d1d9&border_color=30363d" />
+  <img width="46%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=AI-Powered-Directory-Management-System&bg_color=0a0a0f&title_color=c4b5fd&icon_color=7c3aed&text_color=64748b&border_color=1e1b4b" />
 </a>
 &nbsp;&nbsp;
 <a href="https://github.com/yogender-ai/Hybrid-Fuzzy-Neural-Network-for-Stock-Market-Prediction">
-  <img width="47%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=Hybrid-Fuzzy-Neural-Network-for-Stock-Market-Prediction&theme=github_dark&bg_color=0d1117&title_color=6e40c9&icon_color=238636&text_color=c9d1d9&border_color=30363d" />
+  <img width="46%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=Hybrid-Fuzzy-Neural-Network-for-Stock-Market-Prediction&bg_color=0a0a0f&title_color=c4b5fd&icon_color=7c3aed&text_color=64748b&border_color=1e1b4b" />
 </a>
 
 <br><br>
 
 <a href="https://github.com/yogender-ai/Particle-Gravity-Fun">
-  <img width="47%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=Particle-Gravity-Fun&theme=github_dark&bg_color=0d1117&title_color=6e40c9&icon_color=238636&text_color=c9d1d9&border_color=30363d" />
+  <img width="46%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=Particle-Gravity-Fun&bg_color=0a0a0f&title_color=c4b5fd&icon_color=7c3aed&text_color=64748b&border_color=1e1b4b" />
 </a>
 &nbsp;&nbsp;
 <a href="https://github.com/yogender-ai/lion-cat-dog-demo">
-  <img width="47%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=lion-cat-dog-demo&theme=github_dark&bg_color=0d1117&title_color=6e40c9&icon_color=238636&text_color=c9d1d9&border_color=30363d" />
+  <img width="46%" src="https://github-readme-stats.vercel.app/api/pin/?username=yogender-ai&repo=lion-cat-dog-demo&bg_color=0a0a0f&title_color=c4b5fd&icon_color=7c3aed&text_color=64748b&border_color=1e1b4b" />
 </a>
 
 </div>
 
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
+<br>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+<img src="./assets/divider.svg" width="100%">
 
-<!-- ═══════════════════════════════ SNAKE ANIMATION ═══════════════════════════════ -->
+<br>
 
-<h2>
-  <img src="https://media.giphy.com/media/coxQHKASG60HrHtvkt/giphy.gif" width="28">
-  &nbsp;Contribution Snake
-</h2>
+<!-- ━━━━━━━━━━━━━━━━━━━━ TROPHIES ━━━━━━━━━━━━━━━━━━━━ -->
 
 <div align="center">
+
+### `🏆 achievements`
+
+<br>
+
+<a href="https://github.com/yogender-ai">
+  <img width="85%" src="https://github-profile-trophy.vercel.app/?username=yogender-ai&theme=onestar&no-frame=true&no-bg=true&column=7&margin-w=8&margin-h=8" />
+</a>
+
+</div>
+
+<br>
+
+<img src="./assets/divider.svg" width="100%">
+
+<br>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━ SNAKE ━━━━━━━━━━━━━━━━━━━━ -->
+
+<div align="center">
+
+### `🐍 contributions`
+
+<br>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/yogender-ai/yogender-ai/blob/output/github-contribution-grid-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/yogender-ai/yogender-ai/blob/output/github-contribution-grid-snake.svg" />
-  <img alt="github-snake" src="https://github.com/yogender-ai/yogender-ai/blob/output/github-contribution-grid-snake.svg" />
+  <img alt="contribution snake" src="https://github.com/yogender-ai/yogender-ai/blob/output/github-contribution-grid-snake-dark.svg" width="90%"/>
 </picture>
 
 </div>
 
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
+<br>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+<img src="./assets/divider.svg" width="100%">
 
-<!-- ═══════════════════════════════ SPOTIFY / QUOTE ═══════════════════════════════ -->
+<br>
 
-<h2>
-  <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="28">
-  &nbsp;Daily Dev Inspiration
-</h2>
-
-<div align="center">
-  <a href="https://github.com/yogender-ai">
-    <img width="70%" src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark&border=true&quote=The+best+way+to+predict+the+future+is+to+invent+it.&author=Alan+Kay" />
-  </a>
-</div>
-
-<!-- ═══════════════════════════════ ELEGANT DIVIDER ═══════════════════════════════ -->
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
-
-<!-- ═══════════════════════════════ CONNECT WITH ME ═══════════════════════════════ -->
-
-<h2>
-  <img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="28">
-  &nbsp;Let's Connect
-</h2>
+<!-- ━━━━━━━━━━━━━━━━━━━━ CONNECT ━━━━━━━━━━━━━━━━━━━━ -->
 
 <div align="center">
 
-<a href="https://github.com/yogender-ai" target="_blank">
-  <img src="https://img.shields.io/badge/GitHub-0d1117?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+### `📡 connect`
+
+<br>
+
+<a href="https://github.com/yogender-ai">
+  <img src="https://img.shields.io/badge/github-0a0a0f?style=for-the-badge&logo=github&logoColor=c4b5fd" />
 </a>
 &nbsp;
-<a href="mailto:yogender@example.com" target="_blank">
-  <img src="https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=EA4335" alt="Email" />
+<a href="mailto:your.email@example.com">
+  <img src="https://img.shields.io/badge/email-0a0a0f?style=for-the-badge&logo=gmail&logoColor=c4b5fd" />
 </a>
 &nbsp;
-<a href="https://linkedin.com/in/yogender" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=0A66C2" alt="LinkedIn" />
+<a href="https://linkedin.com/in/yogender">
+  <img src="https://img.shields.io/badge/linkedin-0a0a0f?style=for-the-badge&logo=linkedin&logoColor=c4b5fd" />
 </a>
 &nbsp;
-<a href="https://twitter.com/yogender" target="_blank">
-  <img src="https://img.shields.io/badge/Twitter-0d1117?style=for-the-badge&logo=x&logoColor=white" alt="Twitter" />
+<a href="https://twitter.com/yogender">
+  <img src="https://img.shields.io/badge/twitter-0a0a0f?style=for-the-badge&logo=x&logoColor=c4b5fd" />
 </a>
 
 <br><br>
 
-<!-- Cute message -->
-<img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="40">
-<br>
-<b><i>"I love connecting with different people"</i></b> — if you want to say <b>hi, I'll be happy to meet you!</b> 😊
+<sub>
+  if you find my work interesting, consider ⭐ starring some repos — it means a lot.
+</sub>
 
 </div>
 
-<br>
+<br><br>
 
-<!-- ═══════════════════════════════ FOOTER WAVE ═══════════════════════════════ -->
+<!-- ━━━━━━━━━━━━━━━━━━━━ FOOTER ━━━━━━━━━━━━━━━━━━━━ -->
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,25:161b22,50:6e40c9,75:238636,100:1f6feb&height=150&section=footer" />
+<div align="center">
+  <img src="./assets/footer.svg" width="100%" alt="Footer" />
+</div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════════ -->
-<!-- ✦  Crafted with ❤️ by Yogender  •  github.com/yogender-ai                -->
-<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  yogender-ai · github.com/yogender-ai             -->
+<!-- ═══════════════════════════════════════════════════ -->
