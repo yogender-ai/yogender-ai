@@ -3,7 +3,7 @@
 <!-- ╚══════════════════════════════════════════════════════════════╝ -->
 
 <div align="center">
-  <img src="./assets/header.svg" width="100%" alt="Yogender — AI Engineer · Full-Stack Developer · Creator" />
+  <img src="./assets/header.svg" width="100%" alt="Yogender — AI Engineer · Creator" />
 </div>
 
 <br>
