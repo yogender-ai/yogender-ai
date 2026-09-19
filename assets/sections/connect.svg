@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="70" viewBox="0 0 1200 70" role="img" aria-label="let's connect"><title>let's connect</title>
+<defs><linearGradient id="g" x1="0" x2="1" spreadMethod="reflect"><stop offset="0" stop-color="#8b5cf6"/><stop offset=".5" stop-color="#22d3ee"/><stop offset="1" stop-color="#f472b6"/>
+  <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0;0 0" dur="6s" repeatCount="indefinite"/></linearGradient>
+  <linearGradient id="ln" x1="0" x2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity="0"/><stop offset=".5" stop-color="#22d3ee"/><stop offset="1" stop-color="#f472b6" stop-opacity="0"/></linearGradient></defs>
+<style>
+  .n{font:700 15px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;fill:#475569;letter-spacing:2px} .t{font:800 30px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;letter-spacing:1px}
+  .s{animation:s 3.5s ease-in-out infinite} @keyframes s{0%{transform:translateX(-420px)}100%{transform:translateX(1200px)}}
+</style>
+<text x="600" y="38" text-anchor="middle"><tspan class="n">06 // </tspan><tspan class="t" fill="url(#g)">let's connect</tspan></text>
+<rect x="300" y="56" width="600" height="1" fill="#1e1b4b"/>
+<rect class="s" x="0" y="55" width="400" height="3" rx="1.5" fill="url(#ln)"/>
+</svg>

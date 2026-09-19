@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="DSA journey: 36 LeetCode problems solved"><title>DSA journey: 36 LeetCode problems solved</title>
+<defs><linearGradient id="bg" x1="0" x2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<style>
+  .l{font:500 14px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;fill:#94a3b8} .n{font:700 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;fill:#e2e8f0}
+  .gr{transform-box:fill-box;transform-origin:left;animation:grow 1.4s cubic-bezier(.2,.8,.2,1)} @keyframes grow{from{transform:scaleX(0)}}
+  .big{font:800 46px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;fill:#e2e8f0} .sm{font:600 12px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;fill:#94a3b8;letter-spacing:2px}
+  .h{font:700 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;letter-spacing:3px;fill:#8b5cf6} .k{font:600 14px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;fill:#e2e8f0}
+  .ring{animation:spin 18s linear infinite;transform-origin:170px 150px} @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+<rect x=".5" y=".5" width="1199" height="299" rx="18" fill="#0b0d1a" stroke="#1e1b4b"/>
+<circle cx="170" cy="150" r="104" fill="none" stroke="#8b5cf6" stroke-opacity=".35" stroke-dasharray="2 10" class="ring"/>
+<circle cx="170" cy="150" r="78" fill="none" stroke="#1e1b4b" stroke-width="16"/>
+<g transform="rotate(-90 170 150)">
+  <circle cx="170" cy="150" r="78" fill="none" stroke="#2dd4bf" stroke-width="16" stroke-linecap="round" stroke-dasharray="293.5 490.1"><animate attributeName="stroke-dashoffset" from="299.5" to="0" dur="1.6s" fill="freeze"/></circle>
+  <circle cx="170" cy="150" r="78" fill="none" stroke="#fbbf24" stroke-width="16" stroke-linecap="round" stroke-dasharray="184.6 490.1"
+    stroke-dashoffset="-299.5"><animate attributeName="stroke-dashoffset" from="-108.9" to="-299.5" dur="1.6s" begin=".4s" fill="freeze"/></circle>
+</g>
+<text x="170" y="160" text-anchor="middle" class="big">36</text>
+<text x="170" y="184" text-anchor="middle" class="sm">SOLVED</text>
+<text x="380" y="36" class="h">// PATTERNS PRACTISED</text>
+<text x="380" y="71" class="l">Arrays &amp; Hashing</text><rect x="540" y="58" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="58" width="132" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.00s"/><text x="682" y="71" class="n">8</text><text x="380" y="103" class="l">Two Pointers</text><rect x="540" y="90" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="90" width="53" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.18s"/><text x="603" y="103" class="n">3</text><text x="380" y="135" class="l">Sliding Window</text><rect x="540" y="122" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="122" width="22" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.36s"/><text x="572" y="135" class="n">1</text><text x="380" y="167" class="l">Prefix Sum</text><rect x="540" y="154" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="154" width="22" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.54s"/><text x="572" y="167" class="n">1</text><text x="380" y="199" class="l">Stack</text><rect x="540" y="186" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="186" width="22" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.72s"/><text x="572" y="199" class="n">1</text><text x="380" y="231" class="l">Strings · KMP</text><rect x="540" y="218" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="218" width="69" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.90s"/><text x="619" y="231" class="n">4</text><text x="380" y="263" class="l">SQL</text><rect x="540" y="250" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="250" width="336" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:2.08s"/><text x="886" y="263" class="n">21</text>
+<g transform="translate(940 60)">
+  <text class="h" y="-24">// DIFFICULTY</text>
+  <circle cx="7" cy="8" r="7" fill="#2dd4bf"/><text x="22" y="13" class="k">Easy <tspan fill="#94a3b8">· 22</tspan></text>
+  <circle cx="7" cy="40" r="7" fill="#fbbf24"/><text x="22" y="45" class="k">Medium <tspan fill="#94a3b8">· 14</tspan></text>
+  <text class="h" y="96">// LANGUAGES</text>
+  <text y="124" class="k">C++ · Python · MySQL</text>
+  <text y="176" class="st" style="font:700 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace" fill="#22d3ee">open the journey →</text>
+</g>
+</svg>

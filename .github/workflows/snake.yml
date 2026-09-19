@@ -1,15 +1,12 @@
-# GitHub Action to generate contribution snake animation
-# This workflow generates an animated SVG of your contribution grid
+# Builds the live stats card + contribution snake and publishes them to the `output` branch.
+# The README loads them from raw.githubusercontent.com/yogender-ai/yogender-ai/output/…
 
-name: Generate Snake Animation
+name: Generate Profile Assets
 
 on:
-  # Run automatically every 12 hours
   schedule:
-    - cron: "0 */12 * * *"
-  # Allow manual trigger
+    - cron: "0 */12 * * *"   # every 12 hours
   workflow_dispatch:
-  # Run on push to main
   push:
     branches:
       - main
@@ -23,17 +20,23 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      # Generate snake SVG from contribution graph
-      - name: Generate Snake Game
+      - uses: actions/checkout@v4
+
+      - name: Generate snake
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            dist/github-contribution-grid-snake.svg?color_snake=#8b5cf6&color_dots=#ebedf0,#c4b5fd,#a78bfa,#8b5cf6,#6d28d9
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#22d3ee&color_dots=#161b33,#3b1f7a,#6d28d9,#8b5cf6,#c4b5fd
 
-      # Push generated files to output branch
-      - name: Push to Output Branch
+      - name: Generate live stats card
+        run: python .github/scripts/gen_stats.py --out dist/stats.svg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_LOGIN: ${{ github.repository_owner }}
+
+      - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output

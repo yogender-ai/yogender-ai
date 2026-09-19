@@ -1,0 +1,20 @@
+query ($login: String!) {
+  user(login: $login) {
+    followers { totalCount }
+    repositories(ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC, first: 100) {
+      totalCount
+      nodes {
+        stargazerCount
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+          edges { size node { name color } }
+        }
+      }
+    }
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks { contributionDays { contributionCount date } }
+      }
+    }
+  }
+}
