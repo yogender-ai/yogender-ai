@@ -101,6 +101,21 @@ No form, no account linking, nothing to install — you are just <i>on</i> someo
 
 </div>
 
+<br/>
+<br/>
+
+<!-- Painted by .github/workflows/profile-bot.yml, one pixel per issue. -->
+<img src="./assets/place.svg" width="100%" alt="A shared pixel canvas anyone can paint on" />
+
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=place%3A%2024%2024%20cyan&body=Change%20the%20numbers%20in%20the%20title%20to%20the%20x%20and%20y%20you%20want%2C%20and%20the%20colour.%0APalette%3A%20violet%2C%20cyan%2C%20pink%2C%20lime%2C%20amber%2C%20teal%2C%20red%2C%20white%2C%20slate%2C%20black.%0A%0AThen%20just%20submit%20-%20a%20bot%20paints%20it%20and%20closes%20this.">
+<img src="https://img.shields.io/badge/%F0%9F%8E%A8%20paint%20a%20pixel-22d3ee?style=for-the-badge&labelColor=0b0d1a" alt="Paint a pixel" />
+</a>
+
+<sub>Edit the coordinates in the issue title, hit submit, and that pixel is yours.<br/>
+One pixel every 10 minutes per person. Nothing here gets reverted — whatever it becomes, it stays.</sub>
+
+</div>
+
 
 <br/>
 

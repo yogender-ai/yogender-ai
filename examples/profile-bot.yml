@@ -1,0 +1,78 @@
+# Copy this file to .github/workflows/profile-bot.yml
+#
+# Handles both interactive things on the profile:
+#   "sign: ..."            -> adds the author's avatar to assets/wall.svg
+#   "place: <x> <y> <col>" -> paints one pixel on assets/place.svg
+#
+# Anything else is ignored, so ordinary issues are untouched.
+name: Profile bot
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  handle:
+    if: startsWith(github.event.issue.title, 'sign:') || startsWith(github.event.issue.title, 'place:')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Values from the issue go through the environment, never interpolated
+      # into a shell command. Issue-triggered workflows are the classic script
+      # injection surface and a title is attacker-controlled text.
+      - name: Sign the wall
+        if: startsWith(github.event.issue.title, 'sign:')
+        env:
+          SIGNER: ${{ github.event.issue.user.login }}
+        run: |
+          python .github/scripts/wall.py --add "$SIGNER"
+          echo "RESULT=You're on the wall, @$SIGNER. Your avatar is on the profile now." >> "$GITHUB_ENV"
+
+      - name: Paint a pixel
+        if: startsWith(github.event.issue.title, 'place:')
+        env:
+          TITLE: ${{ github.event.issue.title }}
+          PAINTER: ${{ github.event.issue.user.login }}
+        run: |
+          set +e
+          python .github/scripts/place.py --title "$TITLE" --by "$PAINTER" --result /tmp/result.txt
+          echo "PLACE_OK=$?" >> "$GITHUB_ENV"
+          {
+            echo "RESULT<<EOF"
+            cat /tmp/result.txt
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: Commit whatever changed
+        env:
+          WHO: ${{ github.event.issue.user.login }}
+        run: |
+          if [ -n "$(git status --porcelain assets data)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            git add assets data
+            git commit -m "chore: $WHO touched the profile"
+            git push
+          else
+            echo "Nothing changed."
+          fi
+
+      - name: Reply and close
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.issue.number }}
+          WHO: ${{ github.event.issue.user.login }}
+        run: |
+          gh issue comment "$NUMBER" --body "$RESULT
+
+          Thanks for stopping by, @$WHO. 🐺"
+          gh issue close "$NUMBER"
