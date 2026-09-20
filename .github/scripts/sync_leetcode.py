@@ -14,6 +14,7 @@ USERNAME = "yashyogender"
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 README_PATH = os.path.join(ROOT_DIR, "README.md")
 BUILD_ASSETS_PATH = os.path.join(os.path.dirname(__file__), "build_assets.py")
+STATS_PATH = os.path.join(os.path.dirname(__file__), "leetcode_stats.json")
 
 
 def fetch_leetcode_stats(username):
@@ -33,6 +34,13 @@ def fetch_leetcode_stats(username):
           totalActiveDays
         }
       }
+      userContestRanking(username: $username) {
+        rating
+        globalRanking
+        totalParticipants
+        topPercentage
+        attendedContestsCount
+      }
     }
     """
     req = urllib.request.Request(
@@ -42,63 +50,48 @@ def fetch_leetcode_stats(username):
     )
     try:
         res = json.loads(urllib.request.urlopen(req, timeout=10).read().decode("utf-8"))
-        matched = res.get("data", {}).get("matchedUser", {})
+        data = res.get("data") or {}
+        matched = data.get("matchedUser") or {}
         if not matched:
             print(f"User {username} not found on LeetCode")
             return None
 
         diffs = {item["difficulty"]: item["count"] for item in matched["submitStatsGlobal"]["acSubmissionNum"]}
-        streak = matched.get("userCalendar", {}).get("streak", 0)
-        active_days = matched.get("userCalendar", {}).get("totalActiveDays", 0)
+        cal = matched.get("userCalendar") or {}
+        rank = data.get("userContestRanking") or {}
 
         return {
             "total": diffs.get("All", 0),
             "easy": diffs.get("Easy", 0),
             "medium": diffs.get("Medium", 0),
             "hard": diffs.get("Hard", 0),
-            "streak": streak,
-            "active_days": active_days
+            "streak": cal.get("streak") or 0,
+            "active_days": cal.get("totalActiveDays") or 0,
+            "rating": round(rank.get("rating") or 0, 2),
+            "global_ranking": rank.get("globalRanking") or 0,
+            "total_participants": rank.get("totalParticipants") or 0,
+            "top_pct": rank.get("topPercentage") or 0,
+            "contests": rank.get("attendedContestsCount") or 0,
+            "level": 17,
+            "rank_title": "Algorithm Grandmaster",
         }
     except Exception as e:
         print(f"Error querying LeetCode GraphQL: {e}")
         return None
 
 
-def update_build_assets(stats):
-    with open(BUILD_ASSETS_PATH, "r", encoding="utf-8") as f:
-        content = f.read()
+def write_stats(stats):
+    """Hand the numbers to build_assets.py as data.
 
-    # Update easy, med, hard in dsa()
-    content = re.sub(
-        r'easy, med, hard = \d+, \d+, \d+',
-        f'easy, med, hard = {stats["easy"]}, {stats["medium"]}, {stats["hard"]}',
-        content
-    )
-
-    # Update streak text in dsa()
-    content = re.sub(
-        r'🔥 \d+-Day Continuous',
-        f'🔥 {stats["streak"]}-Day Continuous',
-        content
-    )
-
-    # Update CARDS line
-    content = re.sub(
-        r'"\d+ problems, \d+-day streak, Level 17"',
-        f'"{stats["total"]} problems, {stats["streak"]}-day streak, Level 17"',
-        content
-    )
-
-    # Update hero role line
-    content = re.sub(
-        r'"Level 17 Algorithm Grandmaster · \d+ Solved · \d+d Streak 🔥"',
-        f'"Level 17 Algorithm Grandmaster · {stats["total"]} Solved · {stats["streak"]}d Streak 🔥"',
-        content
-    )
-
-    with open(BUILD_ASSETS_PATH, "w", encoding="utf-8", newline="\n") as f:
-        f.write(content)
-    print("Updated build_assets.py with live statistics.")
+    This used to rewrite literals inside build_assets.py with a handful of
+    regexes. Any literal a regex did not match stayed frozen, which is how the
+    terminal card kept advertising an old solve count and rating long after the
+    badge above it had moved on.
+    """
+    with open(STATS_PATH, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(stats, f, indent=2, sort_keys=True)
+        f.write("\n")
+    print(f"Wrote live statistics to {os.path.basename(STATS_PATH)}.")
 
 
 def update_readme(stats):
@@ -133,8 +126,9 @@ if __name__ == "__main__":
     print(f"Fetching LeetCode stats for @{USERNAME}...")
     stats = fetch_leetcode_stats(USERNAME)
     if stats:
-        print(f"Found: Total={stats['total']} (E={stats['easy']}, M={stats['medium']}, H={stats['hard']}), Streak={stats['streak']}d")
-        update_build_assets(stats)
+        print(f"Found: Total={stats['total']} (E={stats['easy']}, M={stats['medium']}, H={stats['hard']}), "
+              f"Streak={stats['streak']}d, Rating={stats['rating']} (top {stats['top_pct']}%)")
+        write_stats(stats)
         update_readme(stats)
         rebuild_assets()
         print("Live sync completed successfully!")

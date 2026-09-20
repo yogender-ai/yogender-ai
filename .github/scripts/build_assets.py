@@ -3,11 +3,41 @@
 Edit the data below and run:  python .github/scripts/build_assets.py
 Everything is pure SVG + CSS/SMIL (no JS, no external fonts) so GitHub renders it inside <img>.
 """
+import json
 import os
 import random
 from xml.sax.saxutils import escape
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "..", "assets")
+
+# Live LeetCode numbers, written by sync_leetcode.py before this runs.
+# These used to be literals scattered through the file that a set of regexes
+# rewrote in place; every literal the regexes missed silently went stale.
+STATS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "leetcode_stats.json")
+
+STATS_DEFAULT = {
+    "total": 0, "easy": 0, "medium": 0, "hard": 0,
+    "streak": 0, "active_days": 0,
+    "rating": 0, "top_pct": 0, "contests": 0, "level": 17,
+    "rank_title": "Algorithm Grandmaster",
+}
+
+
+def load_stats():
+    s = dict(STATS_DEFAULT)
+    try:
+        with open(STATS_PATH, encoding="utf-8") as fh:
+            s.update(json.load(fh))
+    except FileNotFoundError:
+        print(f"[assets] WARNING: {os.path.basename(STATS_PATH)} missing - "
+              "run sync_leetcode.py first; rendering zeros")
+    except Exception as exc:
+        print(f"[assets] WARNING: could not read stats ({exc}); rendering zeros")
+    return s
+
+
+S = load_stats()
+RATING_TXT = f"{round(S['rating'])} Rating (Top {round(S['top_pct'])}%)"
 
 BG, PANEL, EDGE = "#05060f", "#0b0d1a", "#1e1b4b"
 VIOLET, CYAN, PINK, LIME, AMBER, TEAL = "#8b5cf6", "#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#2dd4bf"
@@ -44,7 +74,7 @@ def hero():
     roles = [
         "AI / ML Engineer · High-Performance Systems",
         "Full-Stack Builder · FastAPI · React · Cloud",
-        "Level 17 Algorithm Grandmaster · 277 Solved · 74d Streak 🔥",
+        f"Level {S['level']} {S['rank_title']} · {S['total']} Solved · {S['streak']}d Streak 🔥",
         "I ship products, not notebooks"
     ]
     role_txt = "".join(f'<text x="600" y="252" class="role" style="animation-delay:{i * 3.2:.1f}s">{escape(r)}</text>'
@@ -103,7 +133,7 @@ def hero():
   </g>
   <g transform="translate({W - 240} 36)">
     <rect width="200" height="32" rx="16" fill="{PANEL}" fill-opacity=".75" stroke="{EDGE}"/>
-    <text x="100" y="21" class="chip" text-anchor="middle">🔥 74d streak · Level 17</text>
+    <text x="100" y="21" class="chip" text-anchor="middle">🔥 {S['streak']}d streak · Level {S['level']}</text>
   </g>
 
   <text x="600" y="190" class="name g1">YOGENDER</text>
@@ -124,7 +154,7 @@ def terminal():
         ("whoami", [("yogender", PINK), ("  ·  AI/ML engineer & systems builder  ·  India", MUTED)]),
         ("cat stack.txt", [("python  c++  sql  ", AMBER), ("fastapi  react  pytorch  ", CYAN), ("postgres  redis  docker  kafka", VIOLET)]),
         ("ls ~/projects --shipped", [("DSA-Journey/  NewsIntel/  CloudCommand/  ParticleGravity/  KNN-Demo/  FinanceInsight/", TEAL)]),
-        ("./dsa --stats", [("276 solved", LIME), ("  ·  ", DIM), ("158 easy", TEAL), ("  ·  ", DIM), ("109 med", AMBER), ("  ·  ", DIM), ("9 hard", PINK), ("  ·  74-day streak 🔥  ·  top 26% contest", VIOLET)]),
+        ("./dsa --stats", [(f"{S['total']} solved", LIME), ("  ·  ", DIM), (f"{S['easy']} easy", TEAL), ("  ·  ", DIM), (f"{S['medium']} med", AMBER), ("  ·  ", DIM), (f"{S['hard']} hard", PINK), (f"  ·  {S['streak']}-day streak 🔥  ·  top {round(S['top_pct'])}% contest", VIOLET)]),
         ("echo $MOTTO", [('"Consistency over intensity. Solve, build, ship every day."', PINK)]),
     ]
     y0, step, x0 = 92, 54, 40
@@ -217,7 +247,7 @@ def marquee():
 # ─────────────────────────── PROJECT CARDS ──────────────────────────
 CARDS = [
     ("dsa-journey", "⚔️", "DSA · LeetCode Journey", "ALGORITHMS · RPG", [
-        "277 problems, 74-day streak, Level 17",
+        f"{S['total']} problems, {S['streak']}-day streak, Level {S['level']}",
         "Grandmaster. Organised chronologically",
         "by date & algorithmic pattern."
     ], ["C++", "Python", "SQL", "DSA"], True, (VIOLET, CYAN)),
@@ -302,7 +332,7 @@ def cards():
 # ─────────────────────────────── DSA ────────────────────────────────
 def dsa():
     W, H = 1200, 320
-    easy, med, hard = 159, 109, 9
+    easy, med, hard = S["easy"], S["medium"], S["hard"]
     total = easy + med + hard
     R = 80
     C = 2 * 3.14159 * R
@@ -352,12 +382,12 @@ def dsa():
   <circle cx="7" cy="42" r="6" fill="{AMBER}"/><text x="22" y="47" class="k">Medium <tspan fill="{MUTED}">· {med}</tspan></text>
   <circle cx="7" cy="70" r="6" fill="{PINK}"/><text x="22" y="75" class="k">Hard <tspan fill="{MUTED}">· {hard}</tspan></text>
   <text class="h" y="116">// STREAK &amp; RATING</text>
-  <text y="142" class="k" fill="{LIME}">🔥 74-Day Continuous</text>
-  <text y="166" class="k" fill="{CYAN}">⚔️ 1585 Rating (Top 26%)</text>
+  <text y="142" class="k" fill="{LIME}">🔥 {S['streak']}-Day Continuous</text>
+  <text y="166" class="k" fill="{CYAN}">⚔️ {RATING_TXT}</text>
   <text y="210" class="st" style="font:700 13px {MONO}" fill="{VIOLET}">open the journey →</text>
 </g>
 """
-    save("dsa.svg", svg(W, H, inner, f"DSA journey: {total} LeetCode problems solved · 74-day streak"))
+    save("dsa.svg", svg(W, H, inner, f"DSA journey: {total} LeetCode problems solved · {S['streak']}-day streak"))
 
 
 # ─────────────────────────── SECTION TITLES ─────────────────────────
