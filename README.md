@@ -106,6 +106,14 @@ No form, no account linking, nothing to install — you are just <i>on</i> someo
 
 <img src="./assets/sections/stats.svg" width="100%" alt="05 // live github stats" />
 
+<!-- Redrawn every 6h by sync_leetcode.py from the public contributions calendar. -->
+<img src="./assets/ecg.svg" width="100%" alt="My commit history drawn as an ECG trace" />
+
+<sub>Every beat is a real day and the height is that day's contribution count, so the
+quiet weeks are a genuine flatline. Read left to right, it is the last 90 days of my life
+as a cardiac monitor.</sub>
+
+
 <img src="https://raw.githubusercontent.com/yogender-ai/yogender-ai/output/stats.svg" width="100%" alt="Live GitHub stats — contributions, streaks, heatmap, top languages" />
 
 <picture>

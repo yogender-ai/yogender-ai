@@ -14,6 +14,7 @@ USERNAME = "yashyogender"
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 README_PATH = os.path.join(ROOT_DIR, "README.md")
 BUILD_ASSETS_PATH = os.path.join(os.path.dirname(__file__), "build_assets.py")
+ECG_PATH = os.path.join(os.path.dirname(__file__), "ecg.py")
 STATS_PATH = os.path.join(os.path.dirname(__file__), "leetcode_stats.json")
 
 
@@ -122,6 +123,16 @@ def rebuild_assets():
     print("Regenerated all animated SVG assets.")
 
 
+def rebuild_ecg():
+    """Redraw the commit ECG. Never fail the whole sync over it: the LeetCode
+    numbers are the point of this script, and the ECG reads a scraped page that
+    GitHub may change the markup of without warning."""
+    try:
+        subprocess.run([sys.executable, ECG_PATH], check=True, cwd=ROOT_DIR)
+    except Exception as exc:
+        print(f"ECG rebuild failed ({exc}); leaving the existing card in place.")
+
+
 if __name__ == "__main__":
     print(f"Fetching LeetCode stats for @{USERNAME}...")
     stats = fetch_leetcode_stats(USERNAME)
@@ -131,6 +142,7 @@ if __name__ == "__main__":
         write_stats(stats)
         update_readme(stats)
         rebuild_assets()
+        rebuild_ecg()
         print("Live sync completed successfully!")
     else:
         print("Failed to retrieve stats. Exiting.")
