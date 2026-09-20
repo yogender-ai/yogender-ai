@@ -75,7 +75,14 @@
 
 <img src="./assets/sections/dsa.svg" width="100%" alt="04 // dsa journey" />
 
-<a href="https://github.com/yogender-ai/DSA-LeetCode-Journey"><img src="./assets/dsa.svg" width="100%" alt="276 LeetCode problems solved · 74-day streak — open the DSA journey" /></a>
+<a href="https://github.com/yogender-ai/DSA-LeetCode-Journey"><img src="./assets/dsa.svg" width="100%" alt="LeetCode problems solved and current streak — open the DSA journey" /></a>
+
+<br/>
+
+<!-- Rendered by github.com/yogender-ai/algorithm-replay and rebuilt daily in the journey repo. -->
+<a href="https://github.com/yogender-ai/algorithm-replay"><img src="https://raw.githubusercontent.com/yogender-ai/DSA-LeetCode-Journey/main/assets/algo_replay.svg" width="100%" alt="An algorithm executing step by step — a different one every day" /></a>
+
+<sub>Not a loop of pictures: the algorithm is really executed and every comparison it makes becomes a frame. <a href="https://github.com/yogender-ai/algorithm-replay">Put it in your own README →</a></sub>
 
 <br/>
 
