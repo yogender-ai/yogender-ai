@@ -44,7 +44,7 @@ def hero():
     roles = [
         "AI / ML Engineer · High-Performance Systems",
         "Full-Stack Builder · FastAPI · React · Cloud",
-        "Level 17 Algorithm Grandmaster · 276 Solved · 74d Streak 🔥",
+        "Level 17 Algorithm Grandmaster · 277 Solved · 74d Streak 🔥",
         "I ship products, not notebooks"
     ]
     role_txt = "".join(f'<text x="600" y="252" class="role" style="animation-delay:{i * 3.2:.1f}s">{escape(r)}</text>'
@@ -217,7 +217,7 @@ def marquee():
 # ─────────────────────────── PROJECT CARDS ──────────────────────────
 CARDS = [
     ("dsa-journey", "⚔️", "DSA · LeetCode Journey", "ALGORITHMS · RPG", [
-        "276 problems, 74-day streak, Level 17",
+        "277 problems, 74-day streak, Level 17",
         "Grandmaster. Organised chronologically",
         "by date & algorithmic pattern."
     ], ["C++", "Python", "SQL", "DSA"], True, (VIOLET, CYAN)),
@@ -302,7 +302,7 @@ def cards():
 # ─────────────────────────────── DSA ────────────────────────────────
 def dsa():
     W, H = 1200, 320
-    easy, med, hard = 158, 109, 9
+    easy, med, hard = 159, 109, 9
     total = easy + med + hard
     R = 80
     C = 2 * 3.14159 * R
