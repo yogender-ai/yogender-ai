@@ -7,14 +7,24 @@
 
 <br/>
 
+<!-- Social & Portfolio Badges -->
 <a href="https://yogender1.me"><img src="https://img.shields.io/badge/portfolio-yogender1.me-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0b0d1a" alt="Portfolio" /></a>
+<a href="https://leetcode.com/u/yashyogender/"><img src="https://img.shields.io/badge/LeetCode-276_solved_%C2%B7_74d_streak-FFA116?style=for-the-badge&logo=leetcode&logoColor=white&labelColor=0b0d1a" alt="LeetCode" /></a>
 <a href="https://linkedin.com/in/yogender1"><img src="https://img.shields.io/badge/linkedin-connect-22d3ee?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0b0d1a" alt="LinkedIn" /></a>
 <a href="mailto:yogender.aiml@gmail.com"><img src="https://img.shields.io/badge/email-say%20hi-f472b6?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0b0d1a" alt="Email" /></a>
 <a href="https://x.com/YashsCanvas"><img src="https://img.shields.io/badge/x-follow-e2e8f0?style=for-the-badge&logo=x&logoColor=white&labelColor=0b0d1a" alt="X" /></a>
 
+<br/>
+
 <img src="https://img.shields.io/github/followers/yogender-ai?style=flat-square&logo=github&logoColor=white&label=followers&labelColor=0b0d1a&color=8b5cf6" alt="Followers" />
 <img src="https://img.shields.io/github/stars/yogender-ai?style=flat-square&logo=github&logoColor=white&label=stars&labelColor=0b0d1a&color=22d3ee&affiliations=OWNER" alt="Stars" />
 <img src="https://komarev.com/ghpvc/?username=yogender-ai&style=flat-square&color=f472b6&labelColor=0b0d1a&label=profile+views" alt="Profile views" />
+
+<br/><br/>
+
+> 🚀 **AI / ML Engineer & High-Performance Systems Builder**  
+> ⚔️ **Level 17 Algorithm Grandmaster** · **276+ LeetCode Solved** · 🔥 **74-Day Continuous Streak** · Top 26% Contest Rank  
+> ⚡ *Shipping production AI, real-time distributed backends & interactive 3D experiences — not just Jupyter notebooks.*
 
 </div>
 
@@ -29,12 +39,12 @@
 <img src="./assets/sections/projects.svg" width="100%" alt="02 // featured work" />
 
 <p align="center">
+  <a href="https://github.com/yogender-ai/DSA-LeetCode-Journey"><img src="./assets/cards/dsa-journey.svg" width="49%" alt="DSA LeetCode Journey" /></a>
   <a href="https://github.com/yogender-ai/NewsIntel"><img src="./assets/cards/newsintel.svg" width="49%" alt="NewsIntel" /></a>
   <a href="https://cloud-command.vercel.app"><img src="./assets/cards/cloud-command.svg" width="49%" alt="Cloud Command" /></a>
-  <a href="https://passdesk.vercel.app"><img src="./assets/cards/passdesk.svg" width="49%" alt="PassDesk" /></a>
-  <a href="https://fun-particle.yogender1.me/"><img src="./assets/cards/particle-gravity.svg" width="49%" alt="Particle Gravity" /></a>
-  <a href="https://crm-iota-sepia-80.vercel.app"><img src="./assets/cards/nexuscrm.svg" width="49%" alt="NexusCRM" /></a>
-  <a href="https://github.com/yogender-ai/Site-MOnitoring"><img src="./assets/cards/pingbot.svg" width="49%" alt="PingBot" /></a>
+  <a href="https://fun-particle.yogender1.me/"><img src="./assets/cards/particle-gravity.svg" width="49%" alt="Particle Gravity 3D" /></a>
+  <a href="https://github.com/yogender-ai/knn-cat-dog-demo"><img src="./assets/cards/knn-cat-dog.svg" width="49%" alt="KNN Cat vs Dog" /></a>
+  <a href="https://github.com/yogender-ai/FinanceInsight"><img src="./assets/cards/financeinsight.svg" width="49%" alt="FinanceInsight" /></a>
 </p>
 
 <details>
@@ -43,11 +53,12 @@
 
 | Project | What it does | Stack |
 |:--|:--|:--|
-| [FinanceInsight](https://github.com/yogender-ai/FinanceInsight) | Reads annual reports & 10-Ks end-to-end: sections, events, tables, metrics | Python · NLP · Docker |
+| [PassDesk](https://passdesk.vercel.app) | 6-digit remote desktop screen sharing for Linux, Mac, Windows | Electron · WebRTC · React |
+| [NexusCRM](https://crm-iota-sepia-80.vercel.app) | AI-native mini CRM: audience segmentation, smart campaigns & performance metrics | React · FastAPI · Gemini |
+| [PingBot](https://github.com/yogender-ai/Site-MOnitoring) | Self-hosted uptime monitor with real-time charts & anti-sleep engine | React · Express · PostgreSQL |
 | [DayForge](https://dayforge.yogender1.me) | Focused habit tracker with honest streaks and a contribution-graph month view | JS · Python |
 | [CodeShelf](https://github.com/yogender-ai/CodeShelf) | Coding memory: revision cards, spaced repetition, reminder emails | React · FastAPI · Postgres |
 | [Linux Ops Lab](https://github.com/yogender-ai/Linux-Ops-Monitoring-Lab) | Prometheus + Grafana + Alertmanager → Jira incident lab | Docker · Bash |
-| [KNN Cat vs Dog](https://github.com/yogender-ai/knn-cat-dog-demo) | K-nearest-neighbours image classifier from scratch | Python · CV |
 | [Recursion X-Ray](https://github.com/yogender-ai/Recursion-Xray) | Visualises recursive calls and stack frames step by step | JS |
 | [Aether](https://aether-surface.vercel.app) | A living start surface — frontend challenge | HTML · CSS |
 | [Hybrid Fuzzy NN](https://github.com/yogender-ai/Hybrid-Fuzzy-Neural-Network-for-Stock-Market-Prediction) | Fuzzy logic + neural network for stock-market prediction | Python · ML |
@@ -64,7 +75,7 @@
 
 <img src="./assets/sections/dsa.svg" width="100%" alt="04 // dsa journey" />
 
-<a href="https://github.com/yogender-ai/DSA-LeetCode-Journey"><img src="./assets/dsa.svg" width="100%" alt="36 LeetCode problems solved — open the DSA journey" /></a>
+<a href="https://github.com/yogender-ai/DSA-LeetCode-Journey"><img src="./assets/dsa.svg" width="100%" alt="276 LeetCode problems solved · 74-day streak — open the DSA journey" /></a>
 
 <br/>
 

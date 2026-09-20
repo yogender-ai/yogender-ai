@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="230" viewBox="0 0 580 230" role="img" aria-label="KNN Cat vs Dog — K-Nearest-Neighbours image classifier from scratch using custom Euclidean distance &amp; feature maps in Python &amp; OpenCV."><title>KNN Cat vs Dog — K-Nearest-Neighbours image classifier from scratch using custom Euclidean distance &amp; feature maps in Python &amp; OpenCV.</title>
+<defs>
+  <linearGradient id="bd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset=".5" stop-color="#1e1b4b"/><stop offset="1" stop-color="#8b5cf6"/>
+    <animateTransform attributeName="gradientTransform" type="rotate" values="0 .5 .5;360 .5 .5" dur="6s" repeatCount="indefinite"/></linearGradient>
+  <linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".07"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <radialGradient id="gl" cx="0" cy="0" r="1"><stop offset="0" stop-color="#f472b6" stop-opacity=".28"/><stop offset="1" stop-color="#f472b6" stop-opacity="0"/></radialGradient>
+  <clipPath id="cl"><rect width="580" height="230" rx="20"/></clipPath>
+</defs>
+<style>
+  .t{font:700 24px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;fill:#e2e8f0} .c{font:700 11px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;letter-spacing:2px} .d{font:400 15px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;fill:#94a3b8}
+  .tag{font:600 12px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace} .st{font:700 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace}
+  .dot{animation:p 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center} @keyframes p{to{transform:scale(3);opacity:0}}
+  .sw{animation:sw 5s ease-in-out infinite} @keyframes sw{0%{transform:translateX(-300px) skewX(-20deg)}60%,100%{transform:translateX(780px) skewX(-20deg)}}
+  .ic{animation:bob 4s ease-in-out infinite} @keyframes bob{50%{transform:translateY(-4px)}}
+</style>
+<g clip-path="url(#cl)">
+  <rect width="580" height="230" fill="#0b0d1a"/>
+  <circle cx="0" cy="0" r="260" fill="url(#gl)"/>
+  <rect class="sw" x="0" y="0" width="160" height="230" fill="url(#sh)"/>
+</g>
+<rect x="1" y="1" width="578" height="228" rx="19" fill="none" stroke="url(#bd)" stroke-width="2"/>
+<g class="ic"><rect x="28" y="26" width="46" height="46" rx="12" fill="#f472b6" fill-opacity=".14" stroke="#f472b6" stroke-opacity=".4"/>
+  <text x="51" y="58" text-anchor="middle" font-size="24">🐱</text></g>
+<text x="88" y="58" class="t">KNN Cat vs Dog</text>
+<text x="552" y="44" text-anchor="end" class="c" fill="#8b5cf6">AI · CV</text>
+<text x="28" y="108" class="d">K-Nearest-Neighbours image classifier from</text><text x="28" y="130" class="d">scratch using custom Euclidean distance</text><text x="28" y="152" class="d">&amp; feature maps in Python &amp; OpenCV.</text>
+<g transform="translate(28 178)"><rect width="70" height="26" rx="13" fill="#f472b6" fill-opacity=".12" stroke="#f472b6" stroke-opacity=".45"/><text x="35" y="17.5" text-anchor="middle" class="tag" fill="#f472b6">Python</text></g><g transform="translate(106 178)"><rect width="70" height="26" rx="13" fill="#f472b6" fill-opacity=".12" stroke="#f472b6" stroke-opacity=".45"/><text x="35" y="17.5" text-anchor="middle" class="tag" fill="#f472b6">OpenCV</text></g><g transform="translate(183 178)"><rect width="62" height="26" rx="13" fill="#f472b6" fill-opacity=".12" stroke="#f472b6" stroke-opacity=".45"/><text x="31" y="17.5" text-anchor="middle" class="tag" fill="#f472b6">NumPy</text></g>
+<text x="552" y="196" text-anchor="end" class="st" fill="#94a3b8">source ↗</text>
+</svg>

@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-label="Terminal: whoami, stack, projects, DSA stats"><title>Terminal: whoami, stack, projects, DSA stats</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390" role="img" aria-label="Terminal: whoami, stack, projects, DSA stats"><title>Terminal: whoami, stack, projects, DSA stats</title>
 <style>
   .m{font:500 15px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;white-space:pre} .o{font-size:14px}
   .cur{animation:blink 1s steps(1) infinite} @keyframes blink{50%{opacity:0}}
 </style>
 <defs><linearGradient id="bar" x1="0" x2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".35"/><stop offset="1" stop-color="#22d3ee" stop-opacity=".15"/></linearGradient></defs>
-<rect x=".5" y=".5" width="1199" height="379" rx="18" fill="#0b0d1a" stroke="#1e1b4b"/>
+<rect x=".5" y=".5" width="1199" height="389" rx="18" fill="#0b0d1a" stroke="#1e1b4b"/>
 <path d="M.5 18.5a18 18 0 0 1 18-18h1163a18 18 0 0 1 18 18V44H.5z" fill="url(#bar)"/>
 <circle cx="28" cy="22" r="7" fill="#ff5f57"/><circle cx="52" cy="22" r="7" fill="#febc2e"/><circle cx="76" cy="22" r="7" fill="#28c840"/>
 <text x="600" y="27" text-anchor="middle" style="font:500 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace" fill="#94a3b8">yogender@dev: ~ — zsh</text>
@@ -12,27 +12,27 @@
   <clipPath id="c0"><rect x="40" y="72" height="28" width="0">
     <animate attributeName="width" values="0;0;96;96;0" keyTimes="0;0.030;0.057;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
   <text x="40" y="92" clip-path="url(#c0)" class="m"><tspan fill="#f472b6">❯</tspan> <tspan fill="#e2e8f0">whoami</tspan></text>
-  <text x="62" y="116" class="m o" opacity="0"><tspan fill="#f472b6">yogender</tspan><tspan fill="#94a3b8">  ·  AI/ML engineer  ·  final-year AIML @ LPU  ·  India</tspan>
+  <text x="62" y="116" class="m o" opacity="0"><tspan fill="#f472b6">yogender</tspan><tspan fill="#94a3b8">  ·  AI/ML engineer &amp; systems builder  ·  India</tspan>
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.075;0.095;0.900;1" dur="20.0s" repeatCount="indefinite"/></text>
   <clipPath id="c1"><rect x="40" y="126" height="28" width="0">
     <animate attributeName="width" values="0;0;161;161;0" keyTimes="0;0.103;0.148;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
   <text x="40" y="146" clip-path="url(#c1)" class="m"><tspan fill="#f472b6">❯</tspan> <tspan fill="#e2e8f0">cat stack.txt</tspan></text>
-  <text x="62" y="170" class="m o" opacity="0"><tspan fill="#fbbf24">python  c++  sql  </tspan><tspan fill="#22d3ee">react  fastapi  node  </tspan><tspan fill="#8b5cf6">postgres  redis  docker  kafka</tspan>
+  <text x="62" y="170" class="m o" opacity="0"><tspan fill="#fbbf24">python  c++  sql  </tspan><tspan fill="#22d3ee">fastapi  react  pytorch  </tspan><tspan fill="#8b5cf6">postgres  redis  docker  kafka</tspan>
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.165;0.185;0.900;1" dur="20.0s" repeatCount="indefinite"/></text>
   <clipPath id="c2"><rect x="40" y="180" height="28" width="0">
     <animate attributeName="width" values="0;0;254;254;0" keyTimes="0;0.193;0.263;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
   <text x="40" y="200" clip-path="url(#c2)" class="m"><tspan fill="#f472b6">❯</tspan> <tspan fill="#e2e8f0">ls ~/projects --shipped</tspan></text>
-  <text x="62" y="224" class="m o" opacity="0"><tspan fill="#2dd4bf">NewsIntel/  CloudCommand/  PassDesk/  NexusCRM/  PingBot/  DayForge/</tspan>
+  <text x="62" y="224" class="m o" opacity="0"><tspan fill="#2dd4bf">DSA-Journey/  NewsIntel/  CloudCommand/  ParticleGravity/  KNN-Demo/  FinanceInsight/</tspan>
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.280;0.300;0.900;1" dur="20.0s" repeatCount="indefinite"/></text>
   <clipPath id="c3"><rect x="40" y="234" height="28" width="0">
     <animate attributeName="width" values="0;0;161;161;0" keyTimes="0;0.307;0.353;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
   <text x="40" y="254" clip-path="url(#c3)" class="m"><tspan fill="#f472b6">❯</tspan> <tspan fill="#e2e8f0">./dsa --stats</tspan></text>
-  <text x="62" y="278" class="m o" opacity="0"><tspan fill="#a3e635">36 solved</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#2dd4bf">22 easy</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#fbbf24">14 medium</tspan><tspan fill="#94a3b8">  ·  one problem a day</tspan>
+  <text x="62" y="278" class="m o" opacity="0"><tspan fill="#a3e635">276 solved</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#2dd4bf">158 easy</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#fbbf24">109 med</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#f472b6">9 hard</tspan><tspan fill="#8b5cf6">  ·  74-day streak 🔥  ·  top 26% contest</tspan>
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.370;0.390;0.900;1" dur="20.0s" repeatCount="indefinite"/></text>
   <clipPath id="c4"><rect x="40" y="288" height="28" width="0">
     <animate attributeName="width" values="0;0;142;142;0" keyTimes="0;0.398;0.438;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
   <text x="40" y="308" clip-path="url(#c4)" class="m"><tspan fill="#f472b6">❯</tspan> <tspan fill="#e2e8f0">echo $MOTTO</tspan></text>
-  <text x="62" y="332" class="m o" opacity="0"><tspan fill="#f472b6">"make it work. make it right. make it beautiful."</tspan>
+  <text x="62" y="332" class="m o" opacity="0"><tspan fill="#f472b6">"Consistency over intensity. Solve, build, ship every day."</tspan>
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.455;0.475;0.900;1" dur="20.0s" repeatCount="indefinite"/></text>
   <g opacity="0"><text x="40" y="362" class="m" fill="#f472b6">❯</text>
     <rect x="60" y="347" width="10" height="19" fill="#22d3ee" class="cur"/>

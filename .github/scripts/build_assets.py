@@ -41,8 +41,13 @@ def hero():
         f'begin="-{i * 0.4:.1f}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".55 0 1 .45"/>'
         f'<animate attributeName="y2" values="{HZ};{H}" dur="3.2s" begin="-{i * 0.4:.1f}s" repeatCount="indefinite" '
         f'calcMode="spline" keyTimes="0;1" keySplines=".55 0 1 .45"/></line>' for i in range(8))
-    roles = ["AI / ML Engineer", "Full-Stack Builder", "DSA Grinder · C++ · Python", "I ship products, not notebooks"]
-    role_txt = "".join(f'<text x="600" y="252" class="role" style="animation-delay:{i * 3}s">{escape(r)}</text>'
+    roles = [
+        "AI / ML Engineer · High-Performance Systems",
+        "Full-Stack Builder · FastAPI · React · Cloud",
+        "Level 17 Algorithm Grandmaster · 276 Solved · 74d Streak 🔥",
+        "I ship products, not notebooks"
+    ]
+    role_txt = "".join(f'<text x="600" y="252" class="role" style="animation-delay:{i * 3.2:.1f}s">{escape(r)}</text>'
                        for i, r in enumerate(roles))
     inner = f"""
 <defs>
@@ -71,7 +76,7 @@ def hero():
   .g1{{fill:{CYAN};opacity:0;animation:g1 4s steps(1) infinite}} .g2{{fill:{PINK};opacity:0;animation:g2 4s steps(1) infinite}}
   @keyframes g1{{0%,88%{{opacity:0;transform:none}}89%{{opacity:.75;transform:translate(-6px,2px)}}91%{{opacity:.75;transform:translate(4px,-2px)}}93%,100%{{opacity:0;transform:none}}}}
   @keyframes g2{{0%,88%{{opacity:0;transform:none}}89%{{opacity:.75;transform:translate(6px,-1px)}}91%{{opacity:.75;transform:translate(-5px,2px)}}93%,100%{{opacity:0;transform:none}}}}
-  .role{{font:500 26px {MONO};fill:{CYAN};text-anchor:middle;opacity:0;animation:role 12s infinite}}
+  .role{{font:500 24px {MONO};fill:{CYAN};text-anchor:middle;opacity:0;animation:role 12.8s infinite}}
   @keyframes role{{0%{{opacity:0;transform:translateY(14px)}}3%,22%{{opacity:1;transform:none}}25%,100%{{opacity:0;transform:translateY(-14px)}}}}
   .chip{{font:600 13px {MONO};fill:{MUTED}}}
   .dot{{animation:pulse 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}}
@@ -96,9 +101,9 @@ def hero():
     <circle cx="20" cy="16" r="5" fill="{LIME}"/><circle class="dot" cx="20" cy="16" r="5" fill="{LIME}"/>
     <text x="34" y="21" class="chip">currently shipping</text>
   </g>
-  <g transform="translate({W - 232} 36)">
-    <rect width="192" height="32" rx="16" fill="{PANEL}" fill-opacity=".75" stroke="{EDGE}"/>
-    <text x="96" y="21" class="chip" text-anchor="middle">📍 India · IST</text>
+  <g transform="translate({W - 240} 36)">
+    <rect width="200" height="32" rx="16" fill="{PANEL}" fill-opacity=".75" stroke="{EDGE}"/>
+    <text x="100" y="21" class="chip" text-anchor="middle">🔥 74d streak · Level 17</text>
   </g>
 
   <text x="600" y="190" class="name g1">YOGENDER</text>
@@ -113,15 +118,14 @@ def hero():
 
 # ───────────────────────────── TERMINAL ─────────────────────────────
 def terminal():
-    W, H, T = 1200, 380, 20.0
-    CW = 9.3  # approx. monospace char width at 15px
-    # (command, [output segments (text, colour)])
+    W, H, T = 1200, 390, 20.0
+    CW = 9.3
     session = [
-        ("whoami", [("yogender", PINK), ("  ·  AI/ML engineer  ·  final-year AIML @ LPU  ·  India", MUTED)]),
-        ("cat stack.txt", [("python  c++  sql  ", AMBER), ("react  fastapi  node  ", CYAN), ("postgres  redis  docker  kafka", VIOLET)]),
-        ("ls ~/projects --shipped", [("NewsIntel/  CloudCommand/  PassDesk/  NexusCRM/  PingBot/  DayForge/", TEAL)]),
-        ("./dsa --stats", [("36 solved", LIME), ("  ·  ", DIM), ("22 easy", TEAL), ("  ·  ", DIM), ("14 medium", AMBER), ("  ·  one problem a day", MUTED)]),
-        ("echo $MOTTO", [('"make it work. make it right. make it beautiful."', PINK)]),
+        ("whoami", [("yogender", PINK), ("  ·  AI/ML engineer & systems builder  ·  India", MUTED)]),
+        ("cat stack.txt", [("python  c++  sql  ", AMBER), ("fastapi  react  pytorch  ", CYAN), ("postgres  redis  docker  kafka", VIOLET)]),
+        ("ls ~/projects --shipped", [("DSA-Journey/  NewsIntel/  CloudCommand/  ParticleGravity/  KNN-Demo/  FinanceInsight/", TEAL)]),
+        ("./dsa --stats", [("276 solved", LIME), ("  ·  ", DIM), ("158 easy", TEAL), ("  ·  ", DIM), ("109 med", AMBER), ("  ·  ", DIM), ("9 hard", PINK), ("  ·  74-day streak 🔥  ·  top 26% contest", VIOLET)]),
+        ("echo $MOTTO", [('"Consistency over intensity. Solve, build, ship every day."', PINK)]),
     ]
     y0, step, x0 = 92, 54, 40
     rows, t = [], 0.6
@@ -163,40 +167,47 @@ def terminal():
 # ───────────────────────────── MARQUEE ──────────────────────────────
 TECH_ROWS = [
     [("Python", "#4B8BBE"), ("C++", "#659AD2"), ("TypeScript", "#3178C6"), ("JavaScript", "#F7DF1E"), ("SQL", "#4479A1"),
-     ("PyTorch", "#EE4C2C"), ("TensorFlow", "#FF6F00"), ("scikit-learn", "#F7931E"), ("OpenCV", "#5C3EE8"),
-     ("NumPy", "#4DABCF"), ("Gemini", "#8E75B2"), ("OpenAI", "#E2E8F0"), ("LLMs", PINK)],
-    [("React", "#61DAFB"), ("Next.js", "#E2E8F0"), ("Vite", "#646CFF"), ("Tailwind", "#06B6D4"), ("Three.js", "#E2E8F0"),
-     ("FastAPI", "#009688"), ("Node.js", "#5FA04E"), ("Express", "#E2E8F0"), ("Electron", "#47848F"), ("PostgreSQL", "#4169E1"),
-     ("Redis", "#FF4438"), ("Kafka", "#E2E8F0"), ("Docker", "#2496ED"), ("Linux", "#FCC624"), ("Prometheus", "#E6522C"),
-     ("Grafana", "#F46800"), ("GitHub Actions", "#2088FF"), ("Vercel", "#E2E8F0"), ("Render", "#46E3B7")],
+     ("Bash", "#4EAA25"), ("HTML5", "#E34F26"), ("CSS3", "#1572B6")],
+    [("PyTorch", "#EE4C2C"), ("TensorFlow", "#FF6F00"), ("scikit-learn", "#F7931E"), ("OpenCV", "#5C3EE8"),
+     ("FastAPI", "#009688"), ("React", "#61DAFB"), ("Node.js", "#339933"), ("Express", "#FFFFFF"), ("Next.js", "#FFFFFF")],
+    [("PostgreSQL", "#4169E1"), ("MySQL", "#4479A1"), ("Redis", "#DC382D"), ("Docker", "#2496ED"),
+     ("Kubernetes", "#326CE5"), ("Kafka", "#231F20"), ("Prometheus", "#E6522C"), ("Grafana", "#F46800"),
+     ("Git", "#F05032"), ("Linux", "#FCC624")]
 ]
 
 
 def marquee():
-    W, H = 1200, 150
+    W, H = 1200, 190
+    row_h, gap = 44, 12
+    durations = [32, 38, 30]
     rows = []
-    for r, items in enumerate(TECH_ROWS):
-        pills, x = [], 0
-        for name, col in items:
-            w = len(name) * 8.6 + 50
-            pills.append(f'<g transform="translate({x:.0f} 0)"><rect width="{w:.0f}" height="40" rx="20" fill="{PANEL}" stroke="{EDGE}"/>'
-                         f'<circle cx="22" cy="20" r="6" fill="{col}"/><circle cx="22" cy="20" r="11" fill="{col}" opacity=".15"/>'
-                         f'<text x="38" y="26" class="p">{escape(name)}</text></g>')
-            x += w + 14
-        span = x
-        strip = "".join(pills)
-        direction = ("0", f"-{span:.0f}") if r == 0 else (f"-{span:.0f}", "0")
-        dur = span / 45
-        rows.append(f'<g transform="translate(0 {22 + r * 62})"><g>{strip}<g transform="translate({span:.0f} 0)">{strip}</g>'
-                    f'<animateTransform attributeName="transform" type="translate" from="{direction[0]} 0" to="{direction[1]} 0" '
-                    f'dur="{dur:.1f}s" repeatCount="indefinite"/></g></g>')
+    for r_idx, (techs, dur) in enumerate(zip(TECH_ROWS, durations)):
+        rev = r_idx == 1
+        y = 16 + r_idx * (row_h + gap)
+        items = []
+        x = 0
+        for name, col in techs:
+            w = len(name) * 9 + 48
+            items.append((name, col, w, x))
+            x += w + gap
+        row_w = x
+        copies = 4
+        all_chips = []
+        for c in range(copies):
+            shift = c * row_w
+            for name, col, w, ix in items:
+                all_chips.append(
+                    f'<g transform="translate({ix + shift} 0)"><rect width="{w}" height="{row_h}" rx="{row_h / 2}" fill="{PANEL}" stroke="{EDGE}"/>'
+                    f'<circle cx="20" cy="{row_h / 2}" r="5" fill="{col}"/><text x="34" y="{row_h / 2 + 5}" class="t">{escape(name)}</text></g>')
+        anim = f"""<animateTransform attributeName="transform" type="translate" from="{'0' if not rev else f'-{row_w}'} {y}" to="{f'-{row_w}' if not rev else '0'} {y}" dur="{dur}s" repeatCount="indefinite"/>"""
+        rows.append(f'<g><g>{anim}{"".join(all_chips)}</g></g>')
     inner = f"""
-<style>.p{{font:600 15px {SANS};fill:{TEXT}}}</style>
 <defs>
-  <linearGradient id="edge" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".1" stop-color="#fff"/>
-    <stop offset=".9" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-  <mask id="fade"><rect width="{W}" height="{H}" fill="url(#edge)"/></mask>
+  <linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff"/><stop offset=".92" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 </defs>
+<style>
+  .t{{font:600 14px {MONO};fill:{TEXT}}}
+</style>
 <rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="{BG}" stroke="{EDGE}"/>
 <g mask="url(#fade)">{''.join(rows)}</g>
 """
@@ -205,18 +216,41 @@ def marquee():
 
 # ─────────────────────────── PROJECT CARDS ──────────────────────────
 CARDS = [
-    ("newsintel", "🛰️", "NewsIntel", "AI · DATA", ["Turns noisy live news into ranked,", "deduplicated, AI-enriched intelligence", "cards with source tracing."],
-     ["React", "FastAPI", "AI"], False, (VIOLET, CYAN)),
-    ("cloud-command", "⚡", "Cloud Command", "DEVOPS", ["Mission control for your stack: uptime,", "encrypted API vault, Render + Vercel", "deploys and scheduled jobs."],
-     ["React", "FastAPI"], True, (CYAN, LIME)),
-    ("passdesk", "🖥️", "PassDesk", "DESKTOP APP", ["Remote desktop for Linux, Mac and", "Windows. Share your screen — a friend", "just types a 6-digit code."],
-     ["Electron", "WebRTC"], True, (PINK, VIOLET)),
-    ("particle-gravity", "🌌", "Particle Gravity", "CREATIVE", ["Interactive particle-gravity playground", "running real-time physics right in", "the browser."],
-     ["WebGL", "Three.js", "WASM"], True, (AMBER, PINK)),
-    ("nexuscrm", "🎯", "NexusCRM", "AI · SAAS", ["AI-native mini CRM: explainable", "audiences, personalised campaigns", "and performance insights."],
-     ["React", "FastAPI", "Gemini"], True, (TEAL, VIOLET)),
-    ("pingbot", "📡", "PingBot", "MONITORING", ["Self-hosted uptime monitor with", "real-time analytics, interactive", "charts and an anti-sleep engine."],
-     ["React", "Express", "PostgreSQL"], False, (LIME, CYAN)),
+    ("dsa-journey", "⚔️", "DSA · LeetCode Journey", "ALGORITHMS · RPG", [
+        "276 problems, 74-day streak, Level 17",
+        "Grandmaster. Organised chronologically",
+        "by date & algorithmic pattern."
+    ], ["C++", "Python", "SQL", "DSA"], True, (VIOLET, CYAN)),
+
+    ("newsintel", "🛰️", "NewsIntel", "AI · DATA", [
+        "Turns noisy live news into ranked,",
+        "deduplicated, AI-enriched intelligence",
+        "cards with source tracing."
+    ], ["React", "FastAPI", "AI"], False, (VIOLET, CYAN)),
+
+    ("cloud-command", "⚡", "Cloud Command", "DEVOPS", [
+        "Mission control for your stack: uptime,",
+        "encrypted API vault, Render + Vercel",
+        "deploys and scheduled jobs."
+    ], ["React", "FastAPI", "Docker"], True, (CYAN, LIME)),
+
+    ("particle-gravity", "🌌", "Particle Gravity 3D", "CREATIVE · GAME", [
+        "Interactive 3D particle-gravity sandbox",
+        "running real-time physics and WebGL",
+        "effects right in the browser."
+    ], ["WebGL", "Three.js", "WASM"], True, (AMBER, PINK)),
+
+    ("knn-cat-dog", "🐱", "KNN Cat vs Dog", "AI · CV", [
+        "K-Nearest-Neighbours image classifier from",
+        "scratch using custom Euclidean distance",
+        "& feature maps in Python & OpenCV."
+    ], ["Python", "OpenCV", "NumPy"], False, (PINK, VIOLET)),
+
+    ("financeinsight", "📈", "FinanceInsight", "FINTECH · NLP", [
+        "End-to-end annual report & 10-K reader:",
+        "extracts financial statements, risk factors,",
+        "and revenue tables using NLP."
+    ], ["Python", "NLP", "Docker"], False, (TEAL, VIOLET)),
 ]
 
 
@@ -242,7 +276,7 @@ def cards():
   <clipPath id="cl"><rect width="{W}" height="{H}" rx="20"/></clipPath>
 </defs>
 <style>
-  .t{{font:700 25px {SANS};fill:{TEXT}}} .c{{font:700 11px {MONO};letter-spacing:2px}} .d{{font:400 15px {SANS};fill:{MUTED}}}
+  .t{{font:700 24px {SANS};fill:{TEXT}}} .c{{font:700 11px {MONO};letter-spacing:2px}} .d{{font:400 15px {SANS};fill:{MUTED}}}
   .tag{{font:600 12px {MONO}}} .st{{font:700 13px {MONO}}}
   .dot{{animation:p 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}} @keyframes p{{to{{transform:scale(3);opacity:0}}}}
   .sw{{animation:sw 5s ease-in-out infinite}} @keyframes sw{{0%{{transform:translateX(-300px) skewX(-20deg)}}60%,100%{{transform:translateX({W + 200}px) skewX(-20deg)}}}}
@@ -267,23 +301,28 @@ def cards():
 
 # ─────────────────────────────── DSA ────────────────────────────────
 def dsa():
-    W, H = 1200, 300
-    easy, med = 22, 14
-    total = easy + med
-    R = 78
+    W, H = 1200, 320
+    easy, med, hard = 158, 109, 9
+    total = easy + med + hard
+    R = 80
     C = 2 * 3.14159 * R
-    topics = [("Arrays & Hashing", 8), ("Two Pointers", 3), ("Sliding Window", 1), ("Prefix Sum", 1),
-              ("Stack", 1), ("Strings · KMP", 4), ("SQL", 21)]
+    topics = [
+        ("Arrays & Hashing", 45), ("Two Pointers", 16), ("Trees & BST", 16),
+        ("Graphs & Search", 14), ("Stack & Queue", 12), ("Binary Search", 10), ("SQL", 30)
+    ]
     mx = max(n for _, n in topics)
     bars = []
     for i, (name, n) in enumerate(topics):
-        y = 58 + i * 32
+        y = 58 + i * 33
         w = 330 * n / mx + 6
         bars.append(f'<text x="380" y="{y + 13}" class="l">{escape(name)}</text>'
                     f'<rect x="540" y="{y}" width="336" height="16" rx="8" fill="{EDGE}" fill-opacity=".6"/>'
                     f'<rect x="540" y="{y}" width="{w:.0f}" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:{1.0 + i * 0.18:.2f}s"/>'
                     f'<text x="{540 + w + 10:.0f}" y="{y + 13}" class="n">{n}</text>')
-    e_len, m_len = C * easy / total, C * med / total
+    e_len = C * easy / total
+    m_len = C * med / total
+    h_len = C * hard / total
+
     inner = f"""
 <defs><linearGradient id="bg" x1="0" x2="1"><stop offset="0" stop-color="{VIOLET}"/><stop offset="1" stop-color="{CYAN}"/></linearGradient></defs>
 <style>
@@ -291,30 +330,34 @@ def dsa():
   .gr{{transform-box:fill-box;transform-origin:left;animation:grow 1.4s cubic-bezier(.2,.8,.2,1)}} @keyframes grow{{from{{transform:scaleX(0)}}}}
   .big{{font:800 46px {SANS};fill:{TEXT}}} .sm{{font:600 12px {MONO};fill:{MUTED};letter-spacing:2px}}
   .h{{font:700 13px {MONO};letter-spacing:3px;fill:{VIOLET}}} .k{{font:600 14px {SANS};fill:{TEXT}}}
-  .ring{{animation:spin 18s linear infinite;transform-origin:170px 150px}} @keyframes spin{{to{{transform:rotate(360deg)}}}}
+  .ring{{animation:spin 18s linear infinite;transform-origin:170px 160px}} @keyframes spin{{to{{transform:rotate(360deg)}}}}
 </style>
 <rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="{PANEL}" stroke="{EDGE}"/>
-<circle cx="170" cy="150" r="104" fill="none" stroke="{VIOLET}" stroke-opacity=".35" stroke-dasharray="2 10" class="ring"/>
-<circle cx="170" cy="150" r="{R}" fill="none" stroke="{EDGE}" stroke-width="16"/>
-<g transform="rotate(-90 170 150)">
-  <circle cx="170" cy="150" r="{R}" fill="none" stroke="{TEAL}" stroke-width="16" stroke-linecap="round" stroke-dasharray="{e_len - 6:.1f} {C:.1f}"><animate attributeName="stroke-dashoffset" from="{e_len:.1f}" to="0" dur="1.6s" fill="freeze"/></circle>
-  <circle cx="170" cy="150" r="{R}" fill="none" stroke="{AMBER}" stroke-width="16" stroke-linecap="round" stroke-dasharray="{m_len - 6:.1f} {C:.1f}"
+<circle cx="170" cy="160" r="108" fill="none" stroke="{VIOLET}" stroke-opacity=".35" stroke-dasharray="2 10" class="ring"/>
+<circle cx="170" cy="160" r="{R}" fill="none" stroke="{EDGE}" stroke-width="16"/>
+<g transform="rotate(-90 170 160)">
+  <circle cx="170" cy="160" r="{R}" fill="none" stroke="{TEAL}" stroke-width="16" stroke-linecap="round" stroke-dasharray="{e_len - 4:.1f} {C:.1f}"><animate attributeName="stroke-dashoffset" from="{e_len:.1f}" to="0" dur="1.6s" fill="freeze"/></circle>
+  <circle cx="170" cy="160" r="{R}" fill="none" stroke="{AMBER}" stroke-width="16" stroke-linecap="round" stroke-dasharray="{m_len - 4:.1f} {C:.1f}"
     stroke-dashoffset="{-e_len:.1f}"><animate attributeName="stroke-dashoffset" from="{-e_len + m_len:.1f}" to="{-e_len:.1f}" dur="1.6s" begin=".4s" fill="freeze"/></circle>
+  <circle cx="170" cy="160" r="{R}" fill="none" stroke="{PINK}" stroke-width="16" stroke-linecap="round" stroke-dasharray="{h_len - 4:.1f} {C:.1f}"
+    stroke-dashoffset="{-e_len - m_len:.1f}"><animate attributeName="stroke-dashoffset" from="{-e_len - m_len + h_len:.1f}" to="{-e_len - m_len:.1f}" dur="1.6s" begin=".8s" fill="freeze"/></circle>
 </g>
-<text x="170" y="160" text-anchor="middle" class="big">{total}</text>
-<text x="170" y="184" text-anchor="middle" class="sm">SOLVED</text>
+<text x="170" y="166" text-anchor="middle" class="big">{total}</text>
+<text x="170" y="190" text-anchor="middle" class="sm">SOLVED</text>
 <text x="380" y="36" class="h">// PATTERNS PRACTISED</text>
 {''.join(bars)}
-<g transform="translate(940 60)">
-  <text class="h" y="-24">// DIFFICULTY</text>
-  <circle cx="7" cy="8" r="7" fill="{TEAL}"/><text x="22" y="13" class="k">Easy <tspan fill="{MUTED}">· {easy}</tspan></text>
-  <circle cx="7" cy="40" r="7" fill="{AMBER}"/><text x="22" y="45" class="k">Medium <tspan fill="{MUTED}">· {med}</tspan></text>
-  <text class="h" y="96">// LANGUAGES</text>
-  <text y="124" class="k">C++ · Python · MySQL</text>
-  <text y="176" class="st" style="font:700 13px {MONO}" fill="{CYAN}">open the journey →</text>
+<g transform="translate(940 50)">
+  <text class="h" y="-14">// DIFFICULTY</text>
+  <circle cx="7" cy="14" r="6" fill="{TEAL}"/><text x="22" y="19" class="k">Easy <tspan fill="{MUTED}">· {easy}</tspan></text>
+  <circle cx="7" cy="42" r="6" fill="{AMBER}"/><text x="22" y="47" class="k">Medium <tspan fill="{MUTED}">· {med}</tspan></text>
+  <circle cx="7" cy="70" r="6" fill="{PINK}"/><text x="22" y="75" class="k">Hard <tspan fill="{MUTED}">· {hard}</tspan></text>
+  <text class="h" y="116">// STREAK &amp; RATING</text>
+  <text y="142" class="k" fill="{LIME}">🔥 74-Day Continuous</text>
+  <text y="166" class="k" fill="{CYAN}">⚔️ 1585 Rating (Top 26%)</text>
+  <text y="210" class="st" style="font:700 13px {MONO}" fill="{VIOLET}">open the journey →</text>
 </g>
 """
-    save("dsa.svg", svg(W, H, inner, "DSA journey: 36 LeetCode problems solved"))
+    save("dsa.svg", svg(W, H, inner, f"DSA journey: {total} LeetCode problems solved · 74-day streak"))
 
 
 # ─────────────────────────── SECTION TITLES ─────────────────────────
