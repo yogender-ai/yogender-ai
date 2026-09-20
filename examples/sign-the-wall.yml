@@ -1,0 +1,56 @@
+# Copy this file to .github/workflows/sign-the-wall.yml
+#
+# When anyone opens an issue whose title starts with "sign:", their avatar is
+# added to assets/wall.svg and the issue is closed with a thank-you. No manual
+# step, no approval queue.
+name: Sign the wall
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sign:
+    # Only react to signing issues, so ordinary issues are untouched.
+    if: startsWith(github.event.issue.title, 'sign:')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Add the signer and redraw the wall
+        # The login goes through the environment rather than being interpolated
+        # into the command, so nothing from the issue can reach the shell.
+        env:
+          SIGNER: ${{ github.event.issue.user.login }}
+        run: python .github/scripts/wall.py --add "$SIGNER"
+
+      - name: Commit the new wall
+        env:
+          SIGNER: ${{ github.event.issue.user.login }}
+        run: |
+          if [ -n "$(git status --porcelain assets/wall.svg data/visitors.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            git add assets/wall.svg data/visitors.json
+            git commit -m "chore: $SIGNER signed the wall"
+            git push
+          else
+            echo "$SIGNER had already signed."
+          fi
+
+      - name: Say thanks and close
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.issue.number }}
+          SIGNER: ${{ github.event.issue.user.login }}
+        run: |
+          gh issue comment "$NUMBER" --body "You're on the wall, @$SIGNER. Your avatar is on the profile now — thanks for stopping by. 🐺"
+          gh issue close "$NUMBER"

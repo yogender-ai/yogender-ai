@@ -85,6 +85,24 @@
 <sub>Not a loop of pictures: the algorithm is really executed and every comparison it makes becomes a frame. <a href="https://github.com/yogender-ai/algorithm-replay">Put it in your own README →</a></sub>
 
 <br/>
+<br/>
+
+<div align="center">
+
+<!-- The wall is redrawn by .github/workflows/sign-the-wall.yml whenever someone signs. -->
+<img src="./assets/wall.svg" width="100%" alt="People who have signed this profile" />
+
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=sign%3A%20add%20me%20to%20the%20wall&body=Just%20hit%20submit.%20A%20bot%20adds%20your%20avatar%20to%20the%20wall%20and%20closes%20this%20issue.">
+<img src="https://img.shields.io/badge/%E2%9C%8D%20sign%20the%20wall-8b5cf6?style=for-the-badge&labelColor=0b0d1a" alt="Sign the wall" />
+</a>
+
+<sub>One click. A bot adds your avatar to the image above and closes the issue.<br/>
+No form, no account linking, nothing to install — you are just <i>on</i> someone's profile.</sub>
+
+</div>
+
+
+<br/>
 
 <img src="./assets/sections/stats.svg" width="100%" alt="05 // live github stats" />
 
