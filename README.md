@@ -9,7 +9,7 @@
 
 <!-- Social & Portfolio Badges -->
 <a href="https://yogender1.me"><img src="https://img.shields.io/badge/portfolio-yogender1.me-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0b0d1a" alt="Portfolio" /></a>
-<a href="https://leetcode.com/u/yashyogender/"><img src="https://img.shields.io/badge/LeetCode-277_solved_%C2%B7_74d_streak-FFA116?style=for-the-badge&logo=leetcode&logoColor=white&labelColor=0b0d1a" alt="LeetCode" /></a>
+<a href="https://leetcode.com/u/yashyogender/"><img src="https://img.shields.io/badge/LeetCode-278_solved_%C2%B7_74d_streak-FFA116?style=for-the-badge&logo=leetcode&logoColor=white&labelColor=0b0d1a" alt="LeetCode" /></a>
 <a href="https://linkedin.com/in/yogender1"><img src="https://img.shields.io/badge/linkedin-connect-22d3ee?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0b0d1a" alt="LinkedIn" /></a>
 <a href="mailto:yogender.aiml@gmail.com"><img src="https://img.shields.io/badge/email-say%20hi-f472b6?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0b0d1a" alt="Email" /></a>
 <a href="https://x.com/YashsCanvas"><img src="https://img.shields.io/badge/x-follow-e2e8f0?style=for-the-badge&logo=x&logoColor=white&labelColor=0b0d1a" alt="X" /></a>
@@ -23,7 +23,7 @@
 <br/><br/>
 
 > 🚀 **AI / ML Engineer & High-Performance Systems Builder**  
-> ⚔️ **Level 17 Algorithm Grandmaster** · **277+ LeetCode Solved** · 🔥 **74-Day Continuous Streak** · Top 26% Contest Rank  
+> ⚔️ **Level 17 Algorithm Grandmaster** · **278+ LeetCode Solved** · 🔥 **74-Day Continuous Streak** · Top 26% Contest Rank  
 > ⚡ *Shipping production AI, real-time distributed backends & interactive 3D experiences — not just Jupyter notebooks.*
 
 </div>
