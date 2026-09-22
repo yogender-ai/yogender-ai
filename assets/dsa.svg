@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="DSA journey: 280 LeetCode problems solved · 74-day streak"><title>DSA journey: 280 LeetCode problems solved · 74-day streak</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="DSA journey: 281 LeetCode problems solved · 74-day streak"><title>DSA journey: 281 LeetCode problems solved · 74-day streak</title>
 <defs><linearGradient id="bg" x1="0" x2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
 <style>
   .l{font:500 14px 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;fill:#94a3b8} .n{font:700 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace;fill:#e2e8f0}
@@ -11,20 +11,20 @@
 <circle cx="170" cy="160" r="108" fill="none" stroke="#8b5cf6" stroke-opacity=".35" stroke-dasharray="2 10" class="ring"/>
 <circle cx="170" cy="160" r="80" fill="none" stroke="#1e1b4b" stroke-width="16"/>
 <g transform="rotate(-90 170 160)">
-  <circle cx="170" cy="160" r="80" fill="none" stroke="#2dd4bf" stroke-width="16" stroke-linecap="round" stroke-dasharray="283.2 502.7"><animate attributeName="stroke-dashoffset" from="287.2" to="0" dur="1.6s" fill="freeze"/></circle>
-  <circle cx="170" cy="160" r="80" fill="none" stroke="#fbbf24" stroke-width="16" stroke-linecap="round" stroke-dasharray="195.3 502.7"
-    stroke-dashoffset="-287.2"><animate attributeName="stroke-dashoffset" from="-88.0" to="-287.2" dur="1.6s" begin=".4s" fill="freeze"/></circle>
-  <circle cx="170" cy="160" r="80" fill="none" stroke="#f472b6" stroke-width="16" stroke-linecap="round" stroke-dasharray="12.2 502.7"
-    stroke-dashoffset="-486.5"><animate attributeName="stroke-dashoffset" from="-470.3" to="-486.5" dur="1.6s" begin=".8s" fill="freeze"/></circle>
+  <circle cx="170" cy="160" r="80" fill="none" stroke="#2dd4bf" stroke-width="16" stroke-linecap="round" stroke-dasharray="282.2 502.7"><animate attributeName="stroke-dashoffset" from="286.2" to="0" dur="1.6s" fill="freeze"/></circle>
+  <circle cx="170" cy="160" r="80" fill="none" stroke="#fbbf24" stroke-width="16" stroke-linecap="round" stroke-dasharray="196.3 502.7"
+    stroke-dashoffset="-286.2"><animate attributeName="stroke-dashoffset" from="-85.9" to="-286.2" dur="1.6s" begin=".4s" fill="freeze"/></circle>
+  <circle cx="170" cy="160" r="80" fill="none" stroke="#f472b6" stroke-width="16" stroke-linecap="round" stroke-dasharray="12.1 502.7"
+    stroke-dashoffset="-486.6"><animate attributeName="stroke-dashoffset" from="-470.5" to="-486.6" dur="1.6s" begin=".8s" fill="freeze"/></circle>
 </g>
-<text x="170" y="166" text-anchor="middle" class="big">280</text>
+<text x="170" y="166" text-anchor="middle" class="big">281</text>
 <text x="170" y="190" text-anchor="middle" class="sm">SOLVED</text>
 <text x="380" y="36" class="h">// PATTERNS PRACTISED</text>
 <text x="380" y="71" class="l">Arrays &amp; Hashing</text><rect x="540" y="58" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="58" width="336" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.00s"/><text x="886" y="71" class="n">45</text><text x="380" y="104" class="l">Two Pointers</text><rect x="540" y="91" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="91" width="123" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.18s"/><text x="673" y="104" class="n">16</text><text x="380" y="137" class="l">Trees &amp; BST</text><rect x="540" y="124" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="124" width="123" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.36s"/><text x="673" y="137" class="n">16</text><text x="380" y="170" class="l">Graphs &amp; Search</text><rect x="540" y="157" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="157" width="109" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.54s"/><text x="659" y="170" class="n">14</text><text x="380" y="203" class="l">Stack &amp; Queue</text><rect x="540" y="190" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="190" width="94" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.72s"/><text x="644" y="203" class="n">12</text><text x="380" y="236" class="l">Binary Search</text><rect x="540" y="223" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="223" width="79" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:1.90s"/><text x="629" y="236" class="n">10</text><text x="380" y="269" class="l">SQL</text><rect x="540" y="256" width="336" height="16" rx="8" fill="#1e1b4b" fill-opacity=".6"/><rect x="540" y="256" width="226" height="16" rx="8" fill="url(#bg)" class="gr" style="animation-duration:2.08s"/><text x="776" y="269" class="n">30</text>
 <g transform="translate(940 50)">
   <text class="h" y="-14">// DIFFICULTY</text>
   <circle cx="7" cy="14" r="6" fill="#2dd4bf"/><text x="22" y="19" class="k">Easy <tspan fill="#94a3b8">· 160</tspan></text>
-  <circle cx="7" cy="42" r="6" fill="#fbbf24"/><text x="22" y="47" class="k">Medium <tspan fill="#94a3b8">· 111</tspan></text>
+  <circle cx="7" cy="42" r="6" fill="#fbbf24"/><text x="22" y="47" class="k">Medium <tspan fill="#94a3b8">· 112</tspan></text>
   <circle cx="7" cy="70" r="6" fill="#f472b6"/><text x="22" y="75" class="k">Hard <tspan fill="#94a3b8">· 9</tspan></text>
   <text class="h" y="116">// STREAK &amp; RATING</text>
   <text y="142" class="k" fill="#a3e635">🔥 74-Day Continuous</text>
