@@ -27,7 +27,7 @@
   <clipPath id="c3"><rect x="40" y="234" height="28" width="0">
     <animate attributeName="width" values="0;0;161;161;0" keyTimes="0;0.307;0.353;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
   <text x="40" y="254" clip-path="url(#c3)" class="m"><tspan fill="#f472b6">❯</tspan> <tspan fill="#e2e8f0">./dsa --stats</tspan></text>
-  <text x="62" y="278" class="m o" opacity="0"><tspan fill="#a3e635">282 solved</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#2dd4bf">160 easy</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#fbbf24">113 med</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#f472b6">9 hard</tspan><tspan fill="#8b5cf6">  ·  74-day streak 🔥  ·  top 26% contest</tspan>
+  <text x="62" y="278" class="m o" opacity="0"><tspan fill="#a3e635">282 solved</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#2dd4bf">160 easy</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#fbbf24">113 med</tspan><tspan fill="#475569">  ·  </tspan><tspan fill="#f472b6">9 hard</tspan><tspan fill="#8b5cf6">  ·  74-day streak 🔥  ·  top 27% contest</tspan>
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.370;0.390;0.900;1" dur="20.0s" repeatCount="indefinite"/></text>
   <clipPath id="c4"><rect x="40" y="288" height="28" width="0">
     <animate attributeName="width" values="0;0;142;142;0" keyTimes="0;0.398;0.438;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>
