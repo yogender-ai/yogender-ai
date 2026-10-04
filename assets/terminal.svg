@@ -7,7 +7,7 @@
 <rect x=".5" y=".5" width="1199" height="389" rx="18" fill="#0b0d1a" stroke="#1e1b4b"/>
 <path d="M.5 18.5a18 18 0 0 1 18-18h1163a18 18 0 0 1 18 18V44H.5z" fill="url(#bar)"/>
 <circle cx="28" cy="22" r="7" fill="#ff5f57"/><circle cx="52" cy="22" r="7" fill="#febc2e"/><circle cx="76" cy="22" r="7" fill="#28c840"/>
-<text x="600" y="27" text-anchor="middle" style="font:500 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace" fill="#94a3b8">yogender@dev: ~ — zsh</text>
+<text x="600" y="27" text-anchor="middle" style="font:500 13px 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, Menlo, monospace" fill="#94a3b8">yogender@mission-control: ~ — zsh  ·  uplink stable</text>
 
   <clipPath id="c0"><rect x="40" y="72" height="28" width="0">
     <animate attributeName="width" values="0;0;96;96;0" keyTimes="0;0.030;0.057;0.900;1" dur="20.0s" repeatCount="indefinite"/></rect></clipPath>

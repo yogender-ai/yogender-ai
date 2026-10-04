@@ -28,7 +28,7 @@
 
 </div>
 
-<br/>
+<img src="./assets/launch.svg" width="100%" alt="" />
 
 <img src="./assets/sections/about.svg" width="100%" alt="01 // about me" />
 

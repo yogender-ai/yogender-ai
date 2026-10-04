@@ -13,7 +13,7 @@ This repository powers the dynamic GitHub profile presence for [@yogender-ai](ht
   5. `knn-cat-dog.svg`
   6. `financeinsight.svg`
 - Generates `dsa.svg` tracking live LeetCode stats (276 solved, 74d streak).
-- Builds `terminal.svg`, the deep-space `hero.svg` (nebula, parallax starfield, ringed planet, meteors), `orbits.svg` (tech stack as a solar system) and the planet-horizon `footer.svg`.
+- Builds `terminal.svg`, the deep-space `hero.svg` (nebula, parallax starfield, ringed planet, meteors), `orbits.svg` (tech stack as a solar system), `launch.svg` (warp-speed rocket divider), starry section headers with orbiting planets and the planet-horizon `footer.svg`.
 
 ---
 

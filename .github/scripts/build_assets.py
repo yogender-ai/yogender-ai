@@ -265,7 +265,7 @@ def terminal():
 <rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="{PANEL}" stroke="{EDGE}"/>
 <path d="M.5 18.5a18 18 0 0 1 18-18h{W - 37}a18 18 0 0 1 18 18V44H.5z" fill="url(#bar)"/>
 <circle cx="28" cy="22" r="7" fill="#ff5f57"/><circle cx="52" cy="22" r="7" fill="#febc2e"/><circle cx="76" cy="22" r="7" fill="#28c840"/>
-<text x="600" y="27" text-anchor="middle" style="font:500 13px {MONO}" fill="{MUTED}">yogender@dev: ~ — zsh</text>
+<text x="600" y="27" text-anchor="middle" style="font:500 13px {MONO}" fill="{MUTED}">yogender@mission-control: ~ — zsh  ·  uplink stable</text>
 {''.join(rows)}
 """
     save("terminal.svg", svg(W, H, inner, "Terminal: whoami, stack, projects, DSA stats"))
@@ -285,6 +285,10 @@ TECH_ROWS = [
 
 def marquee():
     W, H = 1200, 190
+    srnd = random.Random(9)
+    mstars = "".join(
+        f'<circle cx="{srnd.uniform(4, W - 4):.0f}" cy="{srnd.uniform(4, H - 4):.0f}" r="{srnd.choice([.5, .7, 1])}" fill="#fff" '
+        f'class="tw" style="animation-delay:{srnd.uniform(0, 4):.1f}s"/>' for _ in range(70))
     row_h, gap = 44, 12
     durations = [32, 38, 30]
     rows = []
@@ -310,12 +314,15 @@ def marquee():
         rows.append(f'<g><g>{anim}{"".join(all_chips)}</g></g>')
     inner = f"""
 <defs>
+  <radialGradient id="mbg" cx=".5" cy=".5" r=".8"><stop offset="0" stop-color="#110a2b"/><stop offset="1" stop-color="{BG}"/></radialGradient>
   <linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff"/><stop offset=".92" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 </defs>
 <style>
   .t{{font:600 14px {MONO};fill:{TEXT}}}
+  .tw{{animation:tw 3.5s ease-in-out infinite}} @keyframes tw{{0%,100%{{opacity:.15}}50%{{opacity:.85}}}}
 </style>
-<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="{BG}" stroke="{EDGE}"/>
+<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="url(#mbg)" stroke="{EDGE}"/>
+{mstars}
 <g mask="url(#fade)">{''.join(rows)}</g>
 """
     save("marquee.svg", svg(W, H, inner, "Tech stack"))
@@ -473,21 +480,83 @@ SECTIONS = [("about", "01", "about me"), ("projects", "02", "featured work"), ("
 
 
 def sections():
-    W, H = 1200, 70
-    for slug, num, label in SECTIONS:
+    W, H = 1200, 84
+    for idx, (slug, num, label) in enumerate(SECTIONS):
+        rnd = random.Random(100 + idx)
+        stars = "".join(
+            f'<circle cx="{rnd.uniform(0, W):.0f}" cy="{rnd.uniform(4, H - 4):.0f}" r="{rnd.choice([.5, .7, 1])}" fill="#fff" '
+            f'class="tw" style="animation-delay:{rnd.uniform(0, 4):.1f}s"/>' for _ in range(46))
+        tw = len(label) * 16.5 + len(num + " // ") * 10.5  # rough rendered width of the title
+        px, pc = 600 + tw / 2 + 30, [VIOLET, CYAN, PINK][idx % 3]
         inner = f"""
-<defs><linearGradient id="g" x1="0" x2="1" spreadMethod="reflect"><stop offset="0" stop-color="{VIOLET}"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}"/>
+<defs><linearGradient id="g" x1="0" x2="1" spreadMethod="reflect"><stop offset="0" stop-color="#c4b5fd"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}"/>
   <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0;0 0" dur="6s" repeatCount="indefinite"/></linearGradient>
-  <linearGradient id="ln" x1="0" x2="1"><stop offset="0" stop-color="{VIOLET}" stop-opacity="0"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}" stop-opacity="0"/></linearGradient></defs>
+  <linearGradient id="ln" x1="0" x2="1"><stop offset="0" stop-color="{VIOLET}" stop-opacity="0"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}" stop-opacity="0"/></linearGradient>
+  <linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".25" stop-color="#fff"/><stop offset=".75" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <mask id="m"><rect width="{W}" height="{H}" fill="url(#fade)"/></mask>
+  <radialGradient id="pl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="{pc}"/><stop offset="1" stop-color="#0b0d1a"/></radialGradient></defs>
 <style>
   .n{{font:700 15px {MONO};fill:{DIM};letter-spacing:2px}} .t{{font:800 30px {SANS};letter-spacing:1px}}
   .s{{animation:s 3.5s ease-in-out infinite}} @keyframes s{{0%{{transform:translateX(-420px)}}100%{{transform:translateX({W}px)}}}}
+  .tw{{animation:tw 3.5s ease-in-out infinite}} @keyframes tw{{0%,100%{{opacity:.15}}50%{{opacity:.9}}}}
+  .mo{{animation:mo 6s linear infinite;transform-origin:{px:.0f}px 34px}} @keyframes mo{{to{{transform:rotate(360deg)}}}}
 </style>
-<text x="600" y="38" text-anchor="middle"><tspan class="n">{num} // </tspan><tspan class="t" fill="url(#g)">{escape(label)}</tspan></text>
-<rect x="300" y="56" width="600" height="1" fill="{EDGE}"/>
-<rect class="s" x="0" y="55" width="400" height="3" rx="1.5" fill="url(#ln)"/>
+<g mask="url(#m)">{stars}</g>
+<text x="600" y="44" text-anchor="middle"><tspan class="n">{num} // </tspan><tspan class="t" fill="url(#g)">{escape(label)}</tspan></text>
+<circle cx="{px:.0f}" cy="34" r="7" fill="url(#pl)"/>
+<ellipse cx="{px:.0f}" cy="34" rx="13" ry="3.6" fill="none" stroke="{pc}" stroke-opacity=".8" transform="rotate(-20 {px:.0f} 34)"/>
+<g class="mo"><circle cx="{px + 20:.0f}" cy="34" r="1.8" fill="#e2e8f0"/></g>
+<rect x="300" y="66" width="600" height="1" fill="{EDGE}"/>
+<rect class="s" x="0" y="65" width="400" height="3" rx="1.5" fill="url(#ln)"/>
 """
         save(f"sections/{slug}.svg", svg(W, H, inner, label))
+
+
+# ───────────────────────────── LAUNCH ──────────────────────────────
+def launch():
+    """A rocket crossing at warp, used as a divider under the hero."""
+    rnd = random.Random(42)
+    W, H = 1200, 110
+    streaks = "".join(
+        f'<line x1="0" y1="{(y := rnd.uniform(6, H - 6)):.0f}" x2="{rnd.uniform(20, 90):.0f}" y2="{y:.0f}" stroke="{rnd.choice(["#fff", "#c4b5fd", CYAN, PINK])}" '
+        f'stroke-width="{rnd.choice([.6, 1, 1.4])}" stroke-linecap="round" class="wp" '
+        f'style="animation-duration:{rnd.uniform(1.2, 3.2):.1f}s;animation-delay:-{rnd.uniform(0, 3):.1f}s"/>'
+        for _ in range(40))
+    sparks = "".join(
+        f'<circle r="{rnd.uniform(1, 2.6):.1f}" fill="{rnd.choice([AMBER, PINK, "#fff", "#fb923c"])}" class="sk" '
+        f'style="animation-delay:-{rnd.uniform(0, 1):.2f}s;--dy:{rnd.uniform(-14, 14):.0f}px"/>' for _ in range(16))
+    inner = f"""
+<defs>
+  <linearGradient id="flame" x1="1" x2="0"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="{AMBER}"/><stop offset=".6" stop-color="{PINK}"/><stop offset="1" stop-color="{VIOLET}" stop-opacity="0"/></linearGradient>
+  <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset=".55" stop-color="#cbd5e1"/><stop offset="1" stop-color="#64748b"/></linearGradient>
+  <linearGradient id="trail" x1="0" x2="1"><stop offset="0" stop-color="{VIOLET}" stop-opacity="0"/><stop offset=".7" stop-color="{CYAN}" stop-opacity=".5"/><stop offset="1" stop-color="{PINK}" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".1" stop-color="#fff"/><stop offset=".9" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <mask id="m"><rect width="{W}" height="{H}" fill="url(#fade)"/></mask>
+</defs>
+<style>
+  .wp{{animation:wp 2s linear infinite}} @keyframes wp{{from{{transform:translateX({W + 100}px)}}to{{transform:translateX(-120px)}}}}
+  .rk{{animation:rk 9s cubic-bezier(.45,.05,.55,.95) -4.5s infinite}}
+  @keyframes rk{{0%{{transform:translate(-160px,58px)}}100%{{transform:translate({W + 160}px,52px)}}}}
+  .bob{{animation:bob 1.2s ease-in-out infinite alternate}} @keyframes bob{{to{{transform:translateY(-5px) rotate(-2deg)}}}}
+  .fl{{animation:fl .12s linear infinite alternate;transform-box:fill-box;transform-origin:right center}} @keyframes fl{{to{{transform:scaleX(1.35) scaleY(.85)}}}}
+  .sk{{animation:sk 1s linear infinite}} @keyframes sk{{from{{opacity:1;transform:translate(-26px,0)}}to{{opacity:0;transform:translate(-120px,var(--dy))}}}}
+  .tr{{animation:tr 9s cubic-bezier(.45,.05,.55,.95) -4.5s infinite}} @keyframes tr{{0%{{transform:translateX(-1520px)}}100%{{transform:translateX(0)}}}}
+</style>
+<g mask="url(#m)">
+  {streaks}
+  <rect class="tr" x="0" y="54" width="1340" height="3" rx="1.5" fill="url(#trail)"/>
+</g>
+<g class="rk"><g class="bob">
+  <path class="fl" d="M-22 -7 Q-70 0 -22 7Z" fill="url(#flame)"/>
+  {sparks}
+  <path d="M-24 -10 L-34 -20 L-14 -10Z M-24 10 L-34 20 L-14 10Z" fill="{PINK}"/>
+  <path d="M-24 -10 H22 Q44 0 22 10 H-24Z" fill="url(#hull)"/>
+  <path d="M28 -6 Q44 0 28 6 Q32 0 28 -6Z" fill="{VIOLET}"/>
+  <circle cx="8" cy="0" r="5" fill="#0b0d1a" stroke="{CYAN}" stroke-width="2"/><circle cx="6.5" cy="-1.5" r="1.4" fill="#fff" opacity=".8"/>
+  <rect x="-18" y="-2" width="12" height="4" rx="2" fill="{VIOLET}"/>
+</g></g>
+"""
+    save("launch.svg", svg(W, H, inner, "A rocket crossing at warp speed"))
 
 
 # ─────────────────────────── TECH ORBITS ────────────────────────────
@@ -585,5 +654,5 @@ def footer():
 
 
 if __name__ == "__main__":
-    hero(); terminal(); marquee(); cards(); dsa(); sections(); orbits(); footer()
+    hero(); terminal(); marquee(); cards(); dsa(); sections(); orbits(); launch(); footer()
     print("assets written to", os.path.abspath(OUT))
