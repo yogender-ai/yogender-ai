@@ -59,86 +59,163 @@ def svg(w, h, inner, title):
 
 
 # ─────────────────────────────── HERO ───────────────────────────────
+def _starfield(rnd, w, h, n, sizes, cls):
+    """A tile of stars `w` wide, drawn twice side by side so it can scroll forever."""
+    tile = "".join(
+        f'<circle cx="{rnd.uniform(0, w):.1f}" cy="{rnd.uniform(0, h):.1f}" r="{rnd.choice(sizes)}" '
+        f'fill="{rnd.choice(["#fff", "#fff", "#fff", "#c7d2fe", "#a5f3fc", "#fbcfe8"])}" '
+        f'class="tw" style="animation-delay:{rnd.uniform(0, 5):.2f}s;animation-duration:{rnd.uniform(2.5, 6):.1f}s"/>'
+        for _ in range(n))
+    return f'<g class="{cls}"><g>{tile}</g><g transform="translate({w} 0)">{tile}</g></g>'
+
+
 def hero():
     rnd = random.Random(7)
-    W, H, HZ = 1200, 420, 285  # HZ = horizon line of the grid floor
-    stars = "".join(
-        f'<circle cx="{rnd.randint(10, W - 10)}" cy="{rnd.randint(10, HZ - 20)}" r="{rnd.choice([0.8, 1, 1.2, 1.6])}" '
-        f'fill="#fff" class="tw" style="animation-delay:{rnd.uniform(0, 4):.2f}s"/>' for _ in range(55))
-    radials = "".join(f'<line x1="600" y1="{HZ}" x2="{x}" y2="{H}"/>' for x in range(-1800, 3001, 160))
-    floor = "".join(
-        f'<line x1="0" x2="{W}" y1="{HZ}" y2="{HZ}"><animate attributeName="y1" values="{HZ};{H}" dur="3.2s" '
-        f'begin="-{i * 0.4:.1f}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".55 0 1 .45"/>'
-        f'<animate attributeName="y2" values="{HZ};{H}" dur="3.2s" begin="-{i * 0.4:.1f}s" repeatCount="indefinite" '
-        f'calcMode="spline" keyTimes="0;1" keySplines=".55 0 1 .45"/></line>' for i in range(8))
+    W, H = 1200, 460
+    far = _starfield(rnd, W, H, 140, [0.5, 0.6, 0.8], "drift-far")
+    mid = _starfield(rnd, W, H, 60, [0.9, 1.1, 1.3], "drift-mid")
+    near = _starfield(rnd, W, H, 18, [1.6, 2.0], "drift-near")
+    # Milky-way band: dense faint dust along a diagonal.
+    band = "".join(
+        f'<circle cx="{(t := rnd.uniform(-100, W + 100)):.0f}" cy="{H * 0.95 - t * 0.42 + rnd.gauss(0, 34):.0f}" '
+        f'r="{rnd.choice([0.4, 0.5, 0.7])}" fill="#fff" opacity="{rnd.uniform(.15, .55):.2f}"/>' for _ in range(260))
+    # Bright stars with diffraction spikes.
+    spikes = "".join(
+        f'<g transform="translate({x} {y})" class="sp" style="animation-delay:{d}s"><circle r="2.2" fill="#fff"/>'
+        f'<path d="M-{s} 0H{s}M0 -{s}V{s}" stroke="{c}" stroke-width=".9" stroke-linecap="round"/>'
+        f'<circle r="7" fill="{c}" opacity=".25"/></g>'
+        for x, y, s, c, d in [(140, 92, 14, CYAN, 0), (1010, 70, 11, PINK, 1.3), (430, 380, 9, "#fff", 2.1),
+                              (770, 48, 8, VIOLET, .7), (60, 330, 10, "#c7d2fe", 1.8)])
+    shooting = "".join(
+        f'<g class="meteor" style="animation-delay:{d}s;--x:{x}px;--y:{y}px">'
+        f'<line x1="0" y1="0" x2="-150" y2="-62" stroke="url(#trail)" stroke-width="2" stroke-linecap="round"/>'
+        f'<circle r="1.8" fill="#fff"/></g>'
+        for x, y, d in [(520, 40, 0), (1100, 20, 3.4), (300, 10, 6.9), (880, 120, 9.1)])
     roles = [
         "AI / ML Engineer · High-Performance Systems",
         "Full-Stack Builder · FastAPI · React · Cloud",
         f"Level {S['level']} {S['rank_title']} · {S['total']} Solved · {S['streak']}d Streak 🔥",
         "I ship products, not notebooks"
     ]
-    role_txt = "".join(f'<text x="600" y="252" class="role" style="animation-delay:{i * 3.2:.1f}s">{escape(r)}</text>'
+    role_txt = "".join(f'<text x="600" y="262" class="role" style="animation-delay:{i * 3.2:.1f}s">{escape(r)}</text>'
                        for i, r in enumerate(roles))
+    PX, PY, PR = 1075, 415, 165  # gas giant, low on the right
     inner = f"""
 <defs>
   <linearGradient id="name" x1="0" x2="1" y1="0" y2="0" spreadMethod="reflect">
-    <stop offset="0" stop-color="{VIOLET}"/><stop offset=".35" stop-color="{CYAN}"/>
-    <stop offset=".7" stop-color="{PINK}"/><stop offset="1" stop-color="{VIOLET}"/>
+    <stop offset="0" stop-color="#c4b5fd"/><stop offset=".35" stop-color="{CYAN}"/>
+    <stop offset=".7" stop-color="{PINK}"/><stop offset="1" stop-color="#c4b5fd"/>
     <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0;0 0" dur="8s" repeatCount="indefinite"/>
   </linearGradient>
-  <linearGradient id="floorfade" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="1"/>
+  <radialGradient id="space" cx=".35" cy=".3" r="1"><stop offset="0" stop-color="#120a2e"/><stop offset=".55" stop-color="#070818"/><stop offset="1" stop-color="#02030a"/></radialGradient>
+  <linearGradient id="trail" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="{CYAN}" stop-opacity="0"/></linearGradient>
+  <filter id="nebula" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".0032 .0055" numOctaves="5" seed="11" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 2.6 -1.15" result="a"/>
+    <feComposite in="SourceGraphic" in2="a" operator="in"/>
+  </filter>
+  <filter id="dust" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="4" seed="3" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3 -1.7" result="a"/>
+    <feComposite in="SourceGraphic" in2="a" operator="in"/>
+  </filter>
+  <linearGradient id="nebcol" x1="0" y1="0" x2="1" y2=".6">
+    <stop offset="0" stop-color="{VIOLET}"/><stop offset=".35" stop-color="#3b82f6"/><stop offset=".55" stop-color="{CYAN}"/>
+    <stop offset=".8" stop-color="{PINK}"/><stop offset="1" stop-color="#7c3aed"/>
   </linearGradient>
-  <mask id="floormask"><rect x="0" y="{HZ}" width="{W}" height="{H - HZ}" fill="url(#floorfade)"/></mask>
-  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="55"/></filter>
-  <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/>
+  <radialGradient id="planet" cx=".32" cy=".28" r=".8">
+    <stop offset="0" stop-color="#a78bfa"/><stop offset=".35" stop-color="#5b21b6"/><stop offset=".7" stop-color="#1e1048"/><stop offset="1" stop-color="#05040f"/>
+  </radialGradient>
+  <pattern id="bands" width="{PR * 2}" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)">
+    <rect width="{PR * 2}" height="34" fill="none"/><rect y="4" width="{PR * 2}" height="7" fill="#c4b5fd" opacity=".12"/>
+    <rect y="17" width="{PR * 2}" height="3" fill="{CYAN}" opacity=".10"/><rect y="25" width="{PR * 2}" height="5" fill="{PINK}" opacity=".08"/>
+    <animateTransform attributeName="patternTransform" type="translate" additive="sum" from="0 0" to="{PR * 2} 0" dur="60s" repeatCount="indefinite"/>
+  </pattern>
+  <radialGradient id="atmo" cx=".5" cy=".5" r=".5"><stop offset=".86" stop-color="{CYAN}" stop-opacity="0"/><stop offset=".93" stop-color="{CYAN}" stop-opacity=".55"/><stop offset="1" stop-color="{VIOLET}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="moon" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#e2e8f0"/><stop offset=".6" stop-color="#64748b"/><stop offset="1" stop-color="#0f172a"/></radialGradient>
+  <linearGradient id="ring" x1="0" x2="1"><stop offset="0" stop-color="{CYAN}" stop-opacity="0"/><stop offset=".3" stop-color="{CYAN}" stop-opacity=".7"/><stop offset=".6" stop-color="#c4b5fd" stop-opacity=".9"/><stop offset="1" stop-color="{PINK}" stop-opacity=".1"/></linearGradient>
+  <clipPath id="pclip"><circle cx="{PX}" cy="{PY}" r="{PR}"/></clipPath>
+  <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
   <clipPath id="card"><rect width="{W}" height="{H}" rx="26"/></clipPath>
 </defs>
 <style>
-  .tw{{animation:tw 3.5s ease-in-out infinite}}
-  @keyframes tw{{0%,100%{{opacity:.15}}50%{{opacity:.9}}}}
-  .b1{{animation:f1 14s ease-in-out infinite}} .b2{{animation:f2 18s ease-in-out infinite}} .b3{{animation:f3 16s ease-in-out infinite}}
-  @keyframes f1{{0%,100%{{transform:translate(0,0)}}50%{{transform:translate(260px,50px)}}}}
-  @keyframes f2{{0%,100%{{transform:translate(0,0)}}50%{{transform:translate(-300px,30px)}}}}
-  @keyframes f3{{0%,100%{{transform:translate(0,0)}}50%{{transform:translate(120px,-60px)}}}}
-  .name{{font:800 104px {SANS};letter-spacing:12px;text-anchor:middle}}
-  .g1{{fill:{CYAN};opacity:0;animation:g1 4s steps(1) infinite}} .g2{{fill:{PINK};opacity:0;animation:g2 4s steps(1) infinite}}
-  @keyframes g1{{0%,88%{{opacity:0;transform:none}}89%{{opacity:.75;transform:translate(-6px,2px)}}91%{{opacity:.75;transform:translate(4px,-2px)}}93%,100%{{opacity:0;transform:none}}}}
-  @keyframes g2{{0%,88%{{opacity:0;transform:none}}89%{{opacity:.75;transform:translate(6px,-1px)}}91%{{opacity:.75;transform:translate(-5px,2px)}}93%,100%{{opacity:0;transform:none}}}}
-  .role{{font:500 24px {MONO};fill:{CYAN};text-anchor:middle;opacity:0;animation:role 12.8s infinite}}
+  .tw{{animation:tw 4s ease-in-out infinite}}
+  @keyframes tw{{0%,100%{{opacity:.25}}50%{{opacity:1}}}}
+  .drift-far{{animation:dr 240s linear infinite}} .drift-mid{{animation:dr 120s linear infinite}} .drift-near{{animation:dr 60s linear infinite}}
+  @keyframes dr{{to{{transform:translateX(-{W}px)}}}}
+  .neb{{animation:nb 30s ease-in-out infinite alternate}}
+  @keyframes nb{{from{{transform:translate(0,0) scale(1)}}to{{transform:translate(-40px,12px) scale(1.04)}}}}
+  .sp{{animation:sp 5s ease-in-out infinite}} @keyframes sp{{0%,100%{{opacity:.55}}50%{{opacity:1}}}}
+  .meteor{{opacity:0;animation:mt 12s linear infinite}}
+  @keyframes mt{{0%{{opacity:0;transform:translate(var(--x),var(--y))}}1%{{opacity:1}}7%{{opacity:0;transform:translate(calc(var(--x) + 360px),calc(var(--y) + 150px))}}100%{{opacity:0;transform:translate(calc(var(--x) + 360px),calc(var(--y) + 150px))}}}}
+  .orbit{{animation:or 26s linear infinite;transform-origin:{PX}px {PY - 60}px}}
+  @keyframes or{{to{{transform:rotate(360deg)}}}}
+  .sat{{animation:sat 38s linear infinite}}
+  @keyframes sat{{0%{{transform:translate(-80px,150px) rotate(8deg)}}100%{{transform:translate(1300px,40px) rotate(8deg)}}}}
+  .blink{{animation:bl 1.4s steps(1) infinite}} @keyframes bl{{50%{{opacity:.1}}}}
+  .name{{font:800 104px {SANS};letter-spacing:14px;text-anchor:middle}}
+  .g1{{fill:{CYAN};opacity:0;animation:g1 5s steps(1) infinite}} .g2{{fill:{PINK};opacity:0;animation:g2 5s steps(1) infinite}}
+  @keyframes g1{{0%,90%{{opacity:0;transform:none}}91%{{opacity:.7;transform:translate(-6px,2px)}}93%{{opacity:.7;transform:translate(4px,-2px)}}95%,100%{{opacity:0;transform:none}}}}
+  @keyframes g2{{0%,90%{{opacity:0;transform:none}}91%{{opacity:.7;transform:translate(6px,-1px)}}93%{{opacity:.7;transform:translate(-5px,2px)}}95%,100%{{opacity:0;transform:none}}}}
+  .role{{font:500 23px {MONO};fill:{CYAN};text-anchor:middle;opacity:0;animation:role 12.8s infinite}}
   @keyframes role{{0%{{opacity:0;transform:translateY(14px)}}3%,22%{{opacity:1;transform:none}}25%,100%{{opacity:0;transform:translateY(-14px)}}}}
   .chip{{font:600 13px {MONO};fill:{MUTED}}}
+  .hud{{font:500 11px {MONO};fill:#64748b;letter-spacing:1.5px}}
   .dot{{animation:pulse 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}}
   @keyframes pulse{{0%{{transform:scale(1);opacity:.9}}100%{{transform:scale(3.2);opacity:0}}}}
-  .scan{{animation:scan 6s linear infinite}}
-  @keyframes scan{{0%{{transform:translateY(-40px)}}100%{{transform:translateY({H + 40}px)}}}}
 </style>
 <g clip-path="url(#card)">
-  <rect width="{W}" height="{H}" fill="{BG}"/>
-  <g filter="url(#blur)" opacity=".75">
-    <circle class="b1" cx="260" cy="120" r="170" fill="{VIOLET}"/>
-    <circle class="b2" cx="930" cy="110" r="160" fill="{CYAN}" opacity=".7"/>
-    <circle class="b3" cx="620" cy="300" r="140" fill="{PINK}" opacity=".55"/>
+  <rect width="{W}" height="{H}" fill="url(#space)"/>
+  <g class="neb">
+    <rect x="-60" y="-40" width="{W + 120}" height="{H + 80}" fill="url(#nebcol)" filter="url(#nebula)" opacity=".85"/>
+    <rect x="-60" y="-40" width="{W + 120}" height="{H + 80}" fill="#1e1b4b" filter="url(#dust)" opacity=".7"/>
   </g>
-  {stars}
-  <g mask="url(#floormask)" stroke="{VIOLET}" stroke-width="1.2" opacity=".75">{radials}{floor}</g>
-  <line x1="0" x2="{W}" y1="{HZ}" y2="{HZ}" stroke="{PINK}" stroke-opacity=".6" stroke-width="1.5"/>
-  <rect class="scan" x="0" y="0" width="{W}" height="40" fill="url(#floorfade)" opacity=".05"/>
+  <g filter="url(#soft)" opacity=".5">
+    <ellipse cx="300" cy="140" rx="220" ry="90" fill="{VIOLET}"/>
+    <ellipse cx="760" cy="90" rx="200" ry="70" fill="{CYAN}" opacity=".6"/>
+  </g>
+  <g>{band}</g>
+  {far}{mid}
+  {spikes}
+  {shooting}
 
+  <!-- satellite crossing the sky -->
+  <g class="sat"><g transform="scale(.9)">
+    <rect x="-16" y="-3" width="12" height="6" fill="#334155" stroke="{CYAN}" stroke-width=".6"/>
+    <rect x="4" y="-3" width="12" height="6" fill="#334155" stroke="{CYAN}" stroke-width=".6"/>
+    <rect x="-4" y="-4" width="8" height="8" rx="1.5" fill="#cbd5e1"/>
+    <circle cx="0" cy="-6" r="1.3" fill="{PINK}" class="blink"/></g></g>
+
+  <!-- gas giant with rings and a moon -->
+  <circle cx="{PX}" cy="{PY}" r="{PR + 26}" fill="url(#atmo)"/>
+  <ellipse cx="{PX}" cy="{PY}" rx="{PR + 150}" ry="40" fill="none" stroke="url(#ring)" stroke-width="10" opacity=".55" transform="rotate(12 {PX} {PY})"/>
+  <circle cx="{PX}" cy="{PY}" r="{PR}" fill="url(#planet)"/>
+  <rect x="{PX - PR}" y="{PY - PR}" width="{PR * 2}" height="{PR * 2}" fill="url(#bands)" clip-path="url(#pclip)"/>
+  <circle cx="{PX}" cy="{PY}" r="{PR}" fill="url(#planet)" opacity=".35"/>
+  <path d="M{PX - PR - 150} {PY} A{PR + 150} 40 0 0 0 {PX + PR + 150} {PY}" fill="none" stroke="url(#ring)" stroke-width="10" opacity=".9" transform="rotate(12 {PX} {PY})"/>
+  <path d="M{PX - PR - 125} {PY} A{PR + 125} 31 0 0 0 {PX + PR + 125} {PY}" fill="none" stroke="#c4b5fd" stroke-width="2" opacity=".5" transform="rotate(12 {PX} {PY})"/>
+  <g class="orbit"><circle cx="{PX - PR - 70}" cy="{PY - 60}" r="13" fill="url(#moon)"/></g>
+  {near}
+
+  <!-- HUD -->
   <g transform="translate(40 36)">
-    <rect width="232" height="32" rx="16" fill="{PANEL}" fill-opacity=".75" stroke="{EDGE}"/>
+    <rect width="232" height="32" rx="16" fill="{PANEL}" fill-opacity=".7" stroke="{EDGE}"/>
     <circle cx="20" cy="16" r="5" fill="{LIME}"/><circle class="dot" cx="20" cy="16" r="5" fill="{LIME}"/>
     <text x="34" y="21" class="chip">currently shipping</text>
   </g>
   <g transform="translate({W - 240} 36)">
-    <rect width="200" height="32" rx="16" fill="{PANEL}" fill-opacity=".75" stroke="{EDGE}"/>
+    <rect width="200" height="32" rx="16" fill="{PANEL}" fill-opacity=".7" stroke="{EDGE}"/>
     <text x="100" y="21" class="chip" text-anchor="middle">🔥 {S['streak']}d streak · Level {S['level']}</text>
   </g>
+  <text x="40" y="{H - 52}" class="hud">◉ SECTOR · OPEN-SOURCE</text>
+  <text x="40" y="{H - 34}" class="hud">RA 05h 35m · DEC −05° 23′ · EARTH</text>
+  <path d="M40 {H - 24}h170" stroke="{EDGE}"/><path d="M40 {H - 24}h60" stroke="{CYAN}" class="blink"/>
 
-  <text x="600" y="190" class="name g1">YOGENDER</text>
-  <text x="600" y="190" class="name g2">YOGENDER</text>
-  <text x="600" y="190" class="name" fill="url(#name)" filter="url(#glow)">YOGENDER</text>
+  <text x="600" y="200" class="name g1">YOGENDER</text>
+  <text x="600" y="200" class="name g2">YOGENDER</text>
+  <text x="600" y="200" class="name" fill="url(#name)" filter="url(#glow)">YOGENDER</text>
   {role_txt}
 </g>
 <rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="26" fill="none" stroke="{EDGE}"/>
@@ -413,36 +490,100 @@ def sections():
         save(f"sections/{slug}.svg", svg(W, H, inner, label))
 
 
-# ─────────────────────────────── FOOTER ─────────────────────────────
-def footer():
-    W, H = 1200, 190
+# ─────────────────────────── TECH ORBITS ────────────────────────────
+ORBITS = [  # (radius x, radius y, seconds per lap, [(name, colour)])
+    (190, 62, 40, [("Python", "#4B8BBE"), ("C++", "#659AD2"), ("SQL", "#4479A1"), ("TypeScript", "#3178C6")]),
+    (330, 108, 70, [("PyTorch", "#EE4C2C"), ("FastAPI", "#009688"), ("React", "#61DAFB"),
+                    ("TensorFlow", "#FF6F00"), ("Node.js", "#339933")]),
+    (480, 156, 110, [("Docker", "#2496ED"), ("PostgreSQL", "#4169E1"), ("Redis", "#DC382D"),
+                     ("Kafka", "#e2e8f0"), ("Linux", "#FCC624"), ("Grafana", "#F46800")]),
+]
 
-    def wave(amp, y, length):
-        pts = [f"M0 {y}"]
-        for i in range(0, 2 * W + length, length):
-            pts.append(f"q{length / 4} {-amp} {length / 2} 0 t{length / 2} 0")
-        return "".join(pts) + f"V{H}H0z"
+
+def orbits():
+    rnd = random.Random(21)
+    W, H, CX, CY = 1200, 400, 600, 200
+    stars = "".join(
+        f'<circle cx="{rnd.uniform(0, W):.0f}" cy="{rnd.uniform(0, H):.0f}" r="{rnd.choice([.5, .7, 1, 1.3])}" fill="#fff" '
+        f'class="tw" style="animation-delay:{rnd.uniform(0, 4):.1f}s"/>' for _ in range(110))
+    rings, planets = [], []
+    for k, (rx, ry, dur, techs) in enumerate(ORBITS):
+        rings.append(f'<ellipse cx="{CX}" cy="{CY}" rx="{rx}" ry="{ry}" fill="none" stroke="{[VIOLET, CYAN, PINK][k]}" '
+                     f'stroke-opacity=".35" stroke-dasharray="{"2 6" if k % 2 else "none"}"/>')
+        path = f"M{CX + rx} {CY}A{rx} {ry} 0 1 1 {CX - rx} {CY}A{rx} {ry} 0 1 1 {CX + rx} {CY}"
+        for i, (name, col) in enumerate(techs):
+            w = len(name) * 8.4 + 34
+            begin = -dur * i / len(techs)
+            planets.append(f"""
+  <g><animateMotion dur="{dur}s" repeatCount="indefinite" begin="{begin:.2f}s" path="{path}"/>
+    <circle r="16" fill="{col}" opacity=".18"/><circle r="6" fill="{col}"/>
+    <g transform="translate(12 -14)"><rect width="{w:.0f}" height="24" rx="12" fill="{PANEL}" fill-opacity=".9" stroke="{EDGE}"/>
+    <text x="{w / 2:.0f}" y="16.5" class="t" text-anchor="middle">{escape(name)}</text></g></g>""")
     inner = f"""
-<defs><linearGradient id="g" x1="0" x2="1" spreadMethod="reflect"><stop offset="0" stop-color="{VIOLET}"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}"/>
-  <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0;0 0" dur="7s" repeatCount="indefinite"/></linearGradient>
-  <clipPath id="c"><rect width="{W}" height="{H}" rx="22"/></clipPath></defs>
+<defs>
+  <radialGradient id="bg" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#140c34"/><stop offset="1" stop-color="{BG}"/></radialGradient>
+  <radialGradient id="sun" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#c4b5fd"/><stop offset=".75" stop-color="{VIOLET}"/><stop offset="1" stop-color="#4c1d95"/></radialGradient>
+  <radialGradient id="corona" r=".5"><stop offset=".45" stop-color="{VIOLET}" stop-opacity=".6"/><stop offset="1" stop-color="{VIOLET}" stop-opacity="0"/></radialGradient>
+  <clipPath id="c"><rect width="{W}" height="{H}" rx="22"/></clipPath>
+</defs>
 <style>
-  .w1{{animation:m 9s linear infinite}} .w2{{animation:m 13s linear infinite reverse}} .w3{{animation:m 17s linear infinite}}
-  @keyframes m{{to{{transform:translateX(-{W // 2}px)}}}}
-  .t{{font:700 24px {SANS}}} .s{{font:500 13px {MONO};fill:{MUTED}}}
+  .t{{font:600 12.5px {MONO};fill:{TEXT}}}
+  .tw{{animation:tw 3.5s ease-in-out infinite}} @keyframes tw{{0%,100%{{opacity:.2}}50%{{opacity:.95}}}}
+  .co{{animation:co 4s ease-in-out infinite;transform-origin:{CX}px {CY}px}} @keyframes co{{0%,100%{{transform:scale(1)}}50%{{transform:scale(1.15)}}}}
+  .core{{font:800 30px {SANS};fill:#fff}} .lbl{{font:600 11px {MONO};fill:{DIM};letter-spacing:2px}}
 </style>
 <g clip-path="url(#c)">
-  <rect width="{W}" height="{H}" fill="{BG}"/>
-  <path class="w1" d="{wave(18, 125, 300)}" fill="{VIOLET}" opacity=".35"/>
-  <path class="w2" d="{wave(14, 140, 400)}" fill="{CYAN}" opacity=".22"/>
-  <path class="w3" d="{wave(10, 155, 240)}" fill="{PINK}" opacity=".2"/>
+  <rect width="{W}" height="{H}" fill="url(#bg)"/>
+  {stars}
+  {''.join(rings)}
+  <circle class="co" cx="{CX}" cy="{CY}" r="80" fill="url(#corona)"/>
+  <circle cx="{CX}" cy="{CY}" r="38" fill="url(#sun)"/>
+  <text x="{CX}" y="{CY + 11}" text-anchor="middle" class="core">Y</text>
+  {''.join(planets)}
+  <text x="30" y="{H - 22}" class="lbl">INNER · LANGUAGES</text>
+  <text x="{CX}" y="{H - 22}" text-anchor="middle" class="lbl">MIDDLE · FRAMEWORKS</text>
+  <text x="{W - 30}" y="{H - 22}" text-anchor="end" class="lbl">OUTER · INFRA</text>
+</g>
+<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="22" fill="none" stroke="{EDGE}"/>
+"""
+    save("orbits.svg", svg(W, H, inner, "Tech stack as a solar system: languages, frameworks and infrastructure in orbit"))
+
+
+# ─────────────────────────────── FOOTER ─────────────────────────────
+def footer():
+    rnd = random.Random(5)
+    W, H = 1200, 230
+    stars = "".join(
+        f'<circle cx="{rnd.uniform(0, W):.0f}" cy="{rnd.uniform(0, 150):.0f}" r="{rnd.choice([.5, .7, 1, 1.3])}" fill="#fff" '
+        f'class="tw" style="animation-delay:{rnd.uniform(0, 4):.1f}s"/>' for _ in range(90))
+    inner = f"""
+<defs><linearGradient id="g" x1="0" x2="1" spreadMethod="reflect"><stop offset="0" stop-color="#c4b5fd"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}"/>
+  <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0;0 0" dur="7s" repeatCount="indefinite"/></linearGradient>
+  <radialGradient id="sky" cx=".5" cy="1" r=".9"><stop offset="0" stop-color="#2e1065"/><stop offset=".5" stop-color="#0b0820"/><stop offset="1" stop-color="{BG}"/></radialGradient>
+  <radialGradient id="ground" cx=".5" cy="0" r=".7"><stop offset="0" stop-color="#1e1048"/><stop offset="1" stop-color="#03030a"/></radialGradient>
+  <radialGradient id="flare" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".15" stop-color="{CYAN}" stop-opacity=".8"/><stop offset="1" stop-color="{VIOLET}" stop-opacity="0"/></radialGradient>
+  <linearGradient id="rim" x1="0" x2="1"><stop offset="0" stop-color="{VIOLET}" stop-opacity="0"/><stop offset=".5" stop-color="{CYAN}"/><stop offset="1" stop-color="{PINK}" stop-opacity="0"/></linearGradient>
+  <clipPath id="c"><rect width="{W}" height="{H}" rx="22"/></clipPath></defs>
+<style>
+  .t{{font:700 26px {SANS}}} .s{{font:500 13px {MONO};fill:{MUTED}}}
+  .tw{{animation:tw 3.5s ease-in-out infinite}} @keyframes tw{{0%,100%{{opacity:.2}}50%{{opacity:.95}}}}
+  .rise{{animation:rise 6s ease-in-out infinite alternate}} @keyframes rise{{from{{opacity:.6;transform:translateY(6px)}}to{{opacity:1;transform:none}}}}
+</style>
+<g clip-path="url(#c)">
+  <rect width="{W}" height="{H}" fill="url(#sky)"/>
+  {stars}
+  <g class="rise"><ellipse cx="600" cy="{H - 92}" rx="260" ry="46" fill="url(#flare)" opacity=".7"/>
+    <path d="M600 {H - 120}v56M560 {H - 92}h80" stroke="#fff" stroke-opacity=".5"/></g>
+  <ellipse cx="600" cy="{H + 885}" rx="1500" ry="1000" fill="url(#ground)"/>
+  <ellipse cx="600" cy="{H + 885}" rx="1500" ry="1000" fill="none" stroke="url(#rim)" stroke-width="2.5"/>
 </g>
 <text x="600" y="62" text-anchor="middle" class="t" fill="url(#g)">thanks for scrolling — let's build something great</text>
-<text x="600" y="92" text-anchor="middle" class="s">yogender1.me  ·  made with svg, css and too much coffee</text>
+<text x="600" y="92" text-anchor="middle" class="s">yogender1.me  ·  transmitted from earth with svg, css and too much coffee</text>
+<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="22" fill="none" stroke="{EDGE}"/>
 """
     save("footer.svg", svg(W, H, inner, "Thanks for scrolling"))
 
 
 if __name__ == "__main__":
-    hero(); terminal(); marquee(); cards(); dsa(); sections(); footer()
+    hero(); terminal(); marquee(); cards(); dsa(); sections(); orbits(); footer()
     print("assets written to", os.path.abspath(OUT))

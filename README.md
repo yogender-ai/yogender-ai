@@ -69,6 +69,8 @@
 
 <img src="./assets/sections/stack.svg" width="100%" alt="03 // tech stack" />
 
+<img src="./assets/orbits.svg" width="100%" alt="My tech stack as a solar system: languages, frameworks and infrastructure orbiting" />
+
 <img src="./assets/marquee.svg" width="100%" alt="Python · C++ · TypeScript · React · FastAPI · Node.js · PostgreSQL · Redis · Docker · PyTorch · TensorFlow …" />
 
 <br/>
