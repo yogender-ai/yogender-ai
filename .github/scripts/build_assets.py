@@ -3,9 +3,11 @@
 Edit the data below and run:  python .github/scripts/build_assets.py
 Everything is pure SVG + CSS/SMIL (no JS, no external fonts) so GitHub renders it inside <img>.
 """
+import datetime
 import json
 import os
 import random
+import re
 from xml.sax.saxutils import escape
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "..", "assets")
@@ -58,7 +60,6 @@ def svg(w, h, inner, title):
             f'role="img" aria-label="{escape(title)}"><title>{escape(title)}</title>{inner}</svg>')
 
 
-# ─────────────────────────────── HERO ───────────────────────────────
 def _starfield(rnd, w, h, n, sizes, cls):
     """A tile of stars `w` wide, drawn twice side by side so it can scroll forever."""
     tile = "".join(
@@ -69,28 +70,197 @@ def _starfield(rnd, w, h, n, sizes, cls):
     return f'<g class="{cls}"><g>{tile}</g><g transform="translate({w} 0)">{tile}</g></g>'
 
 
+def hero_day():
+    """Days since epoch (UTC). HERO_DAY=<int> overrides it to preview another day."""
+    if os.environ.get("HERO_DAY"):
+        return int(os.environ["HERO_DAY"])
+    return datetime.datetime.now(datetime.timezone.utc).date().toordinal()
+
+
+# ── Celestial objects for the right side of the hero. Each returns SVG drawn around (x, y).
+def _obj_giant(x, y, p):
+    r = 165
+    return f"""
+<defs>
+  <radialGradient id="pg" cx=".32" cy=".28" r=".8"><stop offset="0" stop-color="{p['c3']}"/><stop offset=".35" stop-color="{p['c1']}"/><stop offset=".7" stop-color="#1e1048"/><stop offset="1" stop-color="#05040f"/></radialGradient>
+  <pattern id="bands" width="{r * 2}" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)">
+    <rect y="4" width="{r * 2}" height="7" fill="#fff" opacity=".1"/><rect y="17" width="{r * 2}" height="3" fill="{p['c2']}" opacity=".12"/>
+    <rect y="25" width="{r * 2}" height="5" fill="{p['c3']}" opacity=".1"/>
+    <animateTransform attributeName="patternTransform" type="translate" additive="sum" from="0 0" to="{r * 2} 0" dur="60s" repeatCount="indefinite"/></pattern>
+  <radialGradient id="atmo" r=".5"><stop offset=".86" stop-color="{p['c2']}" stop-opacity="0"/><stop offset=".93" stop-color="{p['c2']}" stop-opacity=".55"/><stop offset="1" stop-color="{p['c1']}" stop-opacity="0"/></radialGradient>
+  <linearGradient id="ring" x1="0" x2="1"><stop offset="0" stop-color="{p['c2']}" stop-opacity="0"/><stop offset=".3" stop-color="{p['c2']}" stop-opacity=".7"/><stop offset=".6" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="{p['c3']}" stop-opacity=".1"/></linearGradient>
+  <radialGradient id="moon" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#e2e8f0"/><stop offset=".6" stop-color="#64748b"/><stop offset="1" stop-color="#0f172a"/></radialGradient>
+  <clipPath id="pclip"><circle cx="{x}" cy="{y}" r="{r}"/></clipPath>
+</defs>
+<style>.orbit{{animation:or 26s linear infinite;transform-origin:{x}px {y - 60}px}} @keyframes or{{to{{transform:rotate(360deg)}}}}</style>
+<circle cx="{x}" cy="{y}" r="{r + 26}" fill="url(#atmo)"/>
+<ellipse cx="{x}" cy="{y}" rx="{r + 150}" ry="40" fill="none" stroke="url(#ring)" stroke-width="10" opacity=".5" transform="rotate(12 {x} {y})"/>
+<circle cx="{x}" cy="{y}" r="{r}" fill="url(#pg)"/>
+<rect x="{x - r}" y="{y - r}" width="{r * 2}" height="{r * 2}" fill="url(#bands)" clip-path="url(#pclip)"/>
+<path d="M{x - r - 150} {y} A{r + 150} 40 0 0 0 {x + r + 150} {y}" fill="none" stroke="url(#ring)" stroke-width="10" opacity=".9" transform="rotate(12 {x} {y})"/>
+<g class="orbit"><circle cx="{x - r - 70}" cy="{y - 60}" r="13" fill="url(#moon)"/></g>"""
+
+
+def _obj_blackhole(x, y, p):
+    y -= 150
+    return f"""
+<defs>
+  <linearGradient id="disk" x1="0" x2="1" spreadMethod="reflect"><stop offset="0" stop-color="#fff7ed"/><stop offset=".3" stop-color="{AMBER}"/><stop offset=".6" stop-color="#ea580c"/><stop offset="1" stop-color="{p['c3']}"/>
+    <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0" dur="3s" repeatCount="indefinite"/></linearGradient>
+  <radialGradient id="halo" r=".5"><stop offset=".3" stop-color="#000"/><stop offset=".42" stop-color="#fdba74" stop-opacity=".9"/><stop offset=".55" stop-color="{AMBER}" stop-opacity=".25"/><stop offset="1" stop-color="{p['c3']}" stop-opacity="0"/></radialGradient>
+  <filter id="bh" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<style>.lens{{animation:ln 4s ease-in-out infinite;transform-origin:{x}px {y}px}} @keyframes ln{{50%{{transform:scale(1.06)}}}}</style>
+<circle class="lens" cx="{x}" cy="{y}" r="150" fill="url(#halo)"/>
+<path d="M{x - 190} {y} A190 34 0 0 1 {x + 190} {y}" fill="none" stroke="url(#disk)" stroke-width="16" filter="url(#bh)" opacity=".8"/>
+<ellipse cx="{x}" cy="{y - 4}" rx="62" ry="66" fill="none" stroke="url(#disk)" stroke-width="7" filter="url(#bh)"/>
+<circle cx="{x}" cy="{y}" r="56" fill="#000"/>
+<path d="M{x - 210} {y} A210 40 0 0 0 {x + 210} {y}" fill="none" stroke="url(#disk)" stroke-width="20" filter="url(#bh)"/>
+<path d="M{x - 210} {y} A210 40 0 0 0 {x + 210} {y}" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/>"""
+
+
+def _obj_eclipse(x, y, p):
+    y -= 150
+    rays = "".join(f'<path d="M{x} {y}L{x - 8} {y - 190}L{x + 8} {y - 190}Z" fill="#fff" opacity=".07" transform="rotate({a} {x} {y})"/>'
+                   for a in range(0, 360, 24))
+    return f"""
+<defs>
+  <radialGradient id="cor" r=".5"><stop offset=".38" stop-color="#fff"/><stop offset=".44" stop-color="{p['c2']}" stop-opacity=".8"/><stop offset=".7" stop-color="{p['c1']}" stop-opacity=".25"/><stop offset="1" stop-color="{p['c1']}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="dia" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".2" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="{p['c2']}" stop-opacity="0"/></radialGradient>
+</defs>
+<style>.rays{{animation:rr 80s linear infinite;transform-origin:{x}px {y}px}} @keyframes rr{{to{{transform:rotate(360deg)}}}}
+  .cor{{animation:cp 5s ease-in-out infinite;transform-origin:{x}px {y}px}} @keyframes cp{{50%{{transform:scale(1.08);opacity:.85}}}}
+  .dia{{animation:dd 5s ease-in-out infinite}} @keyframes dd{{0%,100%{{opacity:.4}}50%{{opacity:1}}}}</style>
+<g class="rays">{rays}</g>
+<circle class="cor" cx="{x}" cy="{y}" r="180" fill="url(#cor)"/>
+<circle cx="{x}" cy="{y}" r="68" fill="#020208"/>
+<circle class="dia" cx="{x - 50}" cy="{y - 46}" r="30" fill="url(#dia)"/>"""
+
+
+def _obj_ice(x, y, p):
+    r = 150
+    y -= 40
+    craters = "".join(f'<ellipse cx="{x + dx}" cy="{y + dy}" rx="{rr}" ry="{rr * .7:.0f}" fill="#0e7490" opacity=".25"/>'
+                      for dx, dy, rr in [(-60, -40, 22), (30, 20, 30), (-20, 80, 16), (70, -70, 12), (-95, 40, 14)])
+    return f"""
+<defs>
+  <radialGradient id="ice" cx=".3" cy=".28" r=".85"><stop offset="0" stop-color="#f0fdff"/><stop offset=".35" stop-color="#67e8f9"/><stop offset=".75" stop-color="#0e7490"/><stop offset="1" stop-color="#03111a"/></radialGradient>
+  <radialGradient id="iatmo" r=".5"><stop offset=".84" stop-color="#a5f3fc" stop-opacity="0"/><stop offset=".92" stop-color="#a5f3fc" stop-opacity=".6"/><stop offset="1" stop-color="{p['c1']}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="shade" cx=".25" cy=".2" r="1"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></radialGradient>
+  <radialGradient id="m2" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#78350f"/></radialGradient>
+</defs>
+<style>.o1{{animation:o1 18s linear infinite;transform-origin:{x}px {y}px}} .o2{{animation:o1 30s linear infinite reverse;transform-origin:{x}px {y}px}}
+  @keyframes o1{{to{{transform:rotate(360deg)}}}}</style>
+<circle cx="{x}" cy="{y}" r="{r + 24}" fill="url(#iatmo)"/>
+<circle cx="{x}" cy="{y}" r="{r}" fill="url(#ice)"/>{craters}
+<circle cx="{x}" cy="{y}" r="{r}" fill="url(#shade)"/>
+<g class="o1"><circle cx="{x - r - 40}" cy="{y}" r="9" fill="#e2e8f0"/></g>
+<g class="o2"><circle cx="{x}" cy="{y - r - 60}" r="14" fill="url(#m2)"/></g>"""
+
+
+def _obj_galaxy(x, y, p):
+    rnd = random.Random(99)
+    y -= 150
+    import math
+    dots = []
+    for arm in range(3):
+        for i in range(70):
+            t = i / 70
+            ang = arm * 2.094 + t * 4.2
+            rad = 14 + t * 250
+            px = x + math.cos(ang) * rad + rnd.gauss(0, 7)
+            py = y + math.sin(ang) * rad + rnd.gauss(0, 7)
+            col = rnd.choice(["#fff", p['c2'], p['c3'], "#c7d2fe"])
+            dots.append(f'<circle cx="{px:.0f}" cy="{py:.0f}" r="{rnd.uniform(.6, 2.2) * (1.2 - t * .6):.1f}" fill="{col}" opacity="{1 - t * .6:.2f}"/>')
+    return f"""
+<defs>
+  <radialGradient id="core" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="#fde68a" stop-opacity=".8"/><stop offset="1" stop-color="{p['c1']}" stop-opacity="0"/></radialGradient>
+  <filter id="gb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<style>.gal{{animation:gr 120s linear infinite;transform-origin:{x}px {y}px}} @keyframes gr{{to{{transform:rotate(-360deg)}}}}</style>
+<g transform="rotate(-18 {x} {y})">
+  <ellipse cx="{x}" cy="{y}" rx="260" ry="110" fill="{p['c1']}" opacity=".35" filter="url(#gb)"/>
+  <g transform="translate({x} {y}) scale(1 .42) translate({-x} {-y})"><g class="gal">
+    {''.join(dots)}</g></g>
+  <ellipse cx="{x}" cy="{y}" rx="80" ry="44" fill="url(#core)"/>
+</g>"""
+
+
+def _obj_binary(x, y, p):
+    y -= 150
+    return f"""
+<defs>
+  <radialGradient id="sA" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="#93c5fd"/><stop offset=".6" stop-color="{p['c2']}" stop-opacity=".4"/><stop offset="1" stop-color="{p['c2']}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="sB" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="#fdba74"/><stop offset=".6" stop-color="#f97316" stop-opacity=".4"/><stop offset="1" stop-color="#f97316" stop-opacity="0"/></radialGradient>
+</defs>
+<style>.bin{{animation:bn 14s linear infinite;transform-origin:{x}px {y}px}} @keyframes bn{{to{{transform:rotate(360deg)}}}}
+  .unbin{{animation:bn 14s linear infinite reverse}}
+  .fl1{{animation:fl 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}} @keyframes fl{{50%{{transform:scale(1.12)}}}}</style>
+<ellipse cx="{x}" cy="{y}" rx="110" ry="110" fill="none" stroke="#fff" stroke-opacity=".08" stroke-dasharray="3 7"/>
+<g class="bin">
+  <circle class="fl1" cx="{x - 80}" cy="{y}" r="95" fill="url(#sA)"/>
+  <circle class="fl1" cx="{x + 80}" cy="{y}" r="70" fill="url(#sB)" style="animation-delay:1.3s"/>
+</g>"""
+
+
+def _obj_mars(x, y, p):
+    r = 160
+    y -= 20
+    return f"""
+<defs>
+  <radialGradient id="mars" cx=".3" cy=".28" r=".85"><stop offset="0" stop-color="#fed7aa"/><stop offset=".35" stop-color="#ea580c"/><stop offset=".75" stop-color="#7c2d12"/><stop offset="1" stop-color="#1c0a04"/></radialGradient>
+  <radialGradient id="matmo" r=".5"><stop offset=".86" stop-color="#fb923c" stop-opacity="0"/><stop offset=".93" stop-color="#fb923c" stop-opacity=".5"/><stop offset="1" stop-color="#fb923c" stop-opacity="0"/></radialGradient>
+  <filter id="dunes" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".02 .05" numOctaves="3" seed="4"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 .3  0 0 0 0 .08  0 0 0 0 .02  0 0 0 1.4 -.55"/></filter>
+  <clipPath id="mclip"><circle cx="{x}" cy="{y}" r="{r}"/></clipPath>
+  <radialGradient id="mshade" cx=".25" cy=".2" r="1"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></radialGradient>
+</defs>
+<style>.ph{{animation:ph 11s linear infinite;transform-origin:{x}px {y}px}} @keyframes ph{{to{{transform:rotate(360deg)}}}}</style>
+<circle cx="{x}" cy="{y}" r="{r + 22}" fill="url(#matmo)"/>
+<circle cx="{x}" cy="{y}" r="{r}" fill="url(#mars)"/>
+<rect x="{x - r}" y="{y - r}" width="{r * 2}" height="{r * 2}" filter="url(#dunes)" clip-path="url(#mclip)" opacity=".8"/>
+<ellipse cx="{x - 30}" cy="{y - r + 18}" rx="40" ry="10" fill="#fff" opacity=".7" clip-path="url(#mclip)"/>
+<circle cx="{x}" cy="{y}" r="{r}" fill="url(#mshade)"/>
+<g class="ph"><circle cx="{x - r - 50}" cy="{y}" r="7" fill="#a8a29e"/></g>"""
+
+
+# name, sector label, nebula colours (c1, c2, c3), space tint, object
+HERO_THEMES = [
+    ("Ringed Giant", "SATURN DRIFT", ("#8b5cf6", "#22d3ee", "#f472b6"), "#120a2e", _obj_giant),
+    ("Event Horizon", "SAGITTARIUS A*", ("#7c3aed", "#f97316", "#f43f5e"), "#170a12", _obj_blackhole),
+    ("Total Eclipse", "UMBRA PASSAGE", ("#6366f1", "#e0e7ff", "#a78bfa"), "#0a0b24", _obj_eclipse),
+    ("Frozen World", "EUROPA ORBIT", ("#0ea5e9", "#2dd4bf", "#a5f3fc"), "#041726", _obj_ice),
+    ("Spiral Galaxy", "ANDROMEDA M31", ("#a855f7", "#38bdf8", "#f9a8d4"), "#100a26", _obj_galaxy),
+    ("Binary Suns", "TATOOINE SYSTEM", ("#2563eb", "#22d3ee", "#fb923c"), "#07112a", _obj_binary),
+    ("Red Planet", "MARS APPROACH", ("#dc2626", "#fb923c", "#f472b6"), "#1a0806", _obj_mars),
+]
+
+
+# ─────────────────────────────── HERO ───────────────────────────────
 def hero():
-    rnd = random.Random(7)
+    """A new space scene every day: the theme cycles weekly, the sky is seeded by the date."""
+    day = hero_day()
+    tname, sector, (c1, c2, c3), tint, obj = HERO_THEMES[day % len(HERO_THEMES)]
+    pal = {"c1": c1, "c2": c2, "c3": c3}
+    rnd = random.Random(day)
     W, H = 1200, 460
     far = _starfield(rnd, W, H, 140, [0.5, 0.6, 0.8], "drift-far")
     mid = _starfield(rnd, W, H, 60, [0.9, 1.1, 1.3], "drift-mid")
     near = _starfield(rnd, W, H, 18, [1.6, 2.0], "drift-near")
-    # Milky-way band: dense faint dust along a diagonal.
+    tilt = rnd.uniform(.2, .6) * rnd.choice([-1, 1])
     band = "".join(
-        f'<circle cx="{(t := rnd.uniform(-100, W + 100)):.0f}" cy="{H * 0.95 - t * 0.42 + rnd.gauss(0, 34):.0f}" '
+        f'<circle cx="{(t := rnd.uniform(-100, W + 100)):.0f}" cy="{H * (.95 if tilt > 0 else .05) - t * tilt + rnd.gauss(0, 34):.0f}" '
         f'r="{rnd.choice([0.4, 0.5, 0.7])}" fill="#fff" opacity="{rnd.uniform(.15, .55):.2f}"/>' for _ in range(260))
-    # Bright stars with diffraction spikes.
     spikes = "".join(
-        f'<g transform="translate({x} {y})" class="sp" style="animation-delay:{d}s"><circle r="2.2" fill="#fff"/>'
-        f'<path d="M-{s} 0H{s}M0 -{s}V{s}" stroke="{c}" stroke-width=".9" stroke-linecap="round"/>'
+        f'<g transform="translate({rnd.randint(30, 820)} {rnd.randint(30, H - 90)})" class="sp" style="animation-delay:{rnd.uniform(0, 3):.1f}s">'
+        f'<circle r="2.2" fill="#fff"/><path d="M-{(s := rnd.randint(8, 15))} 0H{s}M0 -{s}V{s}" stroke="{c}" stroke-width=".9" stroke-linecap="round"/>'
         f'<circle r="7" fill="{c}" opacity=".25"/></g>'
-        for x, y, s, c, d in [(140, 92, 14, CYAN, 0), (1010, 70, 11, PINK, 1.3), (430, 380, 9, "#fff", 2.1),
-                              (770, 48, 8, VIOLET, .7), (60, 330, 10, "#c7d2fe", 1.8)])
+        for c in (c2, c3, "#fff", c1, "#c7d2fe"))
     shooting = "".join(
-        f'<g class="meteor" style="animation-delay:{d}s;--x:{x}px;--y:{y}px">'
+        f'<g class="meteor" style="animation-delay:{d:.1f}s;--x:{rnd.randint(150, 1100)}px;--y:{rnd.randint(0, 140)}px">'
         f'<line x1="0" y1="0" x2="-150" y2="-62" stroke="url(#trail)" stroke-width="2" stroke-linecap="round"/>'
         f'<circle r="1.8" fill="#fff"/></g>'
-        for x, y, d in [(520, 40, 0), (1100, 20, 3.4), (300, 10, 6.9), (880, 120, 9.1)])
+        for d in (0, 3.4, 6.9, 9.1))
     roles = [
         "AI / ML Engineer · High-Performance Systems",
         "Full-Stack Builder · FastAPI · React · Cloud",
@@ -99,42 +269,29 @@ def hero():
     ]
     role_txt = "".join(f'<text x="600" y="262" class="role" style="animation-delay:{i * 3.2:.1f}s">{escape(r)}</text>'
                        for i, r in enumerate(roles))
-    PX, PY, PR = 1075, 415, 165  # gas giant, low on the right
+    date_txt = datetime.date.fromordinal(day).strftime("%d %b %Y").upper()
     inner = f"""
 <defs>
   <linearGradient id="name" x1="0" x2="1" y1="0" y2="0" spreadMethod="reflect">
-    <stop offset="0" stop-color="#c4b5fd"/><stop offset=".35" stop-color="{CYAN}"/>
-    <stop offset=".7" stop-color="{PINK}"/><stop offset="1" stop-color="#c4b5fd"/>
+    <stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="{c2}"/>
+    <stop offset=".65" stop-color="{c3}"/><stop offset="1" stop-color="#fff"/>
     <animateTransform attributeName="gradientTransform" type="translate" values="0 0;1 0;0 0" dur="8s" repeatCount="indefinite"/>
   </linearGradient>
-  <radialGradient id="space" cx=".35" cy=".3" r="1"><stop offset="0" stop-color="#120a2e"/><stop offset=".55" stop-color="#070818"/><stop offset="1" stop-color="#02030a"/></radialGradient>
-  <linearGradient id="trail" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="{CYAN}" stop-opacity="0"/></linearGradient>
+  <radialGradient id="space" cx="{rnd.uniform(.2, .5):.2f}" cy=".3" r="1"><stop offset="0" stop-color="{tint}"/><stop offset=".55" stop-color="#070818"/><stop offset="1" stop-color="#02030a"/></radialGradient>
+  <linearGradient id="trail" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="{c2}" stop-opacity="0"/></linearGradient>
   <filter id="nebula" x="0" y="0" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency=".0032 .0055" numOctaves="5" seed="11" result="n"/>
+    <feTurbulence type="fractalNoise" baseFrequency="{rnd.uniform(.0025, .0045):.4f} {rnd.uniform(.004, .007):.4f}" numOctaves="5" seed="{day % 997}" result="n"/>
     <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 2.6 -1.15" result="a"/>
     <feComposite in="SourceGraphic" in2="a" operator="in"/>
   </filter>
   <filter id="dust" x="0" y="0" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="4" seed="3" result="n"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="4" seed="{(day * 7) % 991}" result="n"/>
     <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3 -1.7" result="a"/>
     <feComposite in="SourceGraphic" in2="a" operator="in"/>
   </filter>
-  <linearGradient id="nebcol" x1="0" y1="0" x2="1" y2=".6">
-    <stop offset="0" stop-color="{VIOLET}"/><stop offset=".35" stop-color="#3b82f6"/><stop offset=".55" stop-color="{CYAN}"/>
-    <stop offset=".8" stop-color="{PINK}"/><stop offset="1" stop-color="#7c3aed"/>
+  <linearGradient id="nebcol" x1="0" y1="0" x2="1" y2="{rnd.uniform(.3, .9):.2f}">
+    <stop offset="0" stop-color="{c1}"/><stop offset=".4" stop-color="{c2}"/><stop offset=".75" stop-color="{c3}"/><stop offset="1" stop-color="{c1}"/>
   </linearGradient>
-  <radialGradient id="planet" cx=".32" cy=".28" r=".8">
-    <stop offset="0" stop-color="#a78bfa"/><stop offset=".35" stop-color="#5b21b6"/><stop offset=".7" stop-color="#1e1048"/><stop offset="1" stop-color="#05040f"/>
-  </radialGradient>
-  <pattern id="bands" width="{PR * 2}" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)">
-    <rect width="{PR * 2}" height="34" fill="none"/><rect y="4" width="{PR * 2}" height="7" fill="#c4b5fd" opacity=".12"/>
-    <rect y="17" width="{PR * 2}" height="3" fill="{CYAN}" opacity=".10"/><rect y="25" width="{PR * 2}" height="5" fill="{PINK}" opacity=".08"/>
-    <animateTransform attributeName="patternTransform" type="translate" additive="sum" from="0 0" to="{PR * 2} 0" dur="60s" repeatCount="indefinite"/>
-  </pattern>
-  <radialGradient id="atmo" cx=".5" cy=".5" r=".5"><stop offset=".86" stop-color="{CYAN}" stop-opacity="0"/><stop offset=".93" stop-color="{CYAN}" stop-opacity=".55"/><stop offset="1" stop-color="{VIOLET}" stop-opacity="0"/></radialGradient>
-  <radialGradient id="moon" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#e2e8f0"/><stop offset=".6" stop-color="#64748b"/><stop offset="1" stop-color="#0f172a"/></radialGradient>
-  <linearGradient id="ring" x1="0" x2="1"><stop offset="0" stop-color="{CYAN}" stop-opacity="0"/><stop offset=".3" stop-color="{CYAN}" stop-opacity=".7"/><stop offset=".6" stop-color="#c4b5fd" stop-opacity=".9"/><stop offset="1" stop-color="{PINK}" stop-opacity=".1"/></linearGradient>
-  <clipPath id="pclip"><circle cx="{PX}" cy="{PY}" r="{PR}"/></clipPath>
   <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
@@ -150,19 +307,17 @@ def hero():
   .sp{{animation:sp 5s ease-in-out infinite}} @keyframes sp{{0%,100%{{opacity:.55}}50%{{opacity:1}}}}
   .meteor{{opacity:0;animation:mt 12s linear infinite}}
   @keyframes mt{{0%{{opacity:0;transform:translate(var(--x),var(--y))}}1%{{opacity:1}}7%{{opacity:0;transform:translate(calc(var(--x) + 360px),calc(var(--y) + 150px))}}100%{{opacity:0;transform:translate(calc(var(--x) + 360px),calc(var(--y) + 150px))}}}}
-  .orbit{{animation:or 26s linear infinite;transform-origin:{PX}px {PY - 60}px}}
-  @keyframes or{{to{{transform:rotate(360deg)}}}}
   .sat{{animation:sat 38s linear infinite}}
   @keyframes sat{{0%{{transform:translate(-80px,150px) rotate(8deg)}}100%{{transform:translate(1300px,40px) rotate(8deg)}}}}
   .blink{{animation:bl 1.4s steps(1) infinite}} @keyframes bl{{50%{{opacity:.1}}}}
   .name{{font:800 104px {SANS};letter-spacing:14px;text-anchor:middle}}
-  .g1{{fill:{CYAN};opacity:0;animation:g1 5s steps(1) infinite}} .g2{{fill:{PINK};opacity:0;animation:g2 5s steps(1) infinite}}
+  .g1{{fill:{c2};opacity:0;animation:g1 5s steps(1) infinite}} .g2{{fill:{c3};opacity:0;animation:g2 5s steps(1) infinite}}
   @keyframes g1{{0%,90%{{opacity:0;transform:none}}91%{{opacity:.7;transform:translate(-6px,2px)}}93%{{opacity:.7;transform:translate(4px,-2px)}}95%,100%{{opacity:0;transform:none}}}}
   @keyframes g2{{0%,90%{{opacity:0;transform:none}}91%{{opacity:.7;transform:translate(6px,-1px)}}93%{{opacity:.7;transform:translate(-5px,2px)}}95%,100%{{opacity:0;transform:none}}}}
-  .role{{font:500 23px {MONO};fill:{CYAN};text-anchor:middle;opacity:0;animation:role 12.8s infinite}}
+  .role{{font:500 23px {MONO};fill:{c2};text-anchor:middle;opacity:0;animation:role 12.8s infinite}}
   @keyframes role{{0%{{opacity:0;transform:translateY(14px)}}3%,22%{{opacity:1;transform:none}}25%,100%{{opacity:0;transform:translateY(-14px)}}}}
   .chip{{font:600 13px {MONO};fill:{MUTED}}}
-  .hud{{font:500 11px {MONO};fill:#64748b;letter-spacing:1.5px}}
+  .hud{{font:500 11px {MONO};fill:#64748b;letter-spacing:1.5px}} .hudb{{font:700 11px {MONO};fill:{c2};letter-spacing:1.5px}}
   .dot{{animation:pulse 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}}
   @keyframes pulse{{0%{{transform:scale(1);opacity:.9}}100%{{transform:scale(3.2);opacity:0}}}}
 </style>
@@ -170,36 +325,23 @@ def hero():
   <rect width="{W}" height="{H}" fill="url(#space)"/>
   <g class="neb">
     <rect x="-60" y="-40" width="{W + 120}" height="{H + 80}" fill="url(#nebcol)" filter="url(#nebula)" opacity=".85"/>
-    <rect x="-60" y="-40" width="{W + 120}" height="{H + 80}" fill="#1e1b4b" filter="url(#dust)" opacity=".7"/>
+    <rect x="-60" y="-40" width="{W + 120}" height="{H + 80}" fill="#0b0a20" filter="url(#dust)" opacity=".7"/>
   </g>
-  <g filter="url(#soft)" opacity=".5">
-    <ellipse cx="300" cy="140" rx="220" ry="90" fill="{VIOLET}"/>
-    <ellipse cx="760" cy="90" rx="200" ry="70" fill="{CYAN}" opacity=".6"/>
+  <g filter="url(#soft)" opacity=".45">
+    <ellipse cx="{rnd.randint(200, 500)}" cy="{rnd.randint(80, 200)}" rx="220" ry="90" fill="{c1}"/>
+    <ellipse cx="{rnd.randint(600, 900)}" cy="{rnd.randint(60, 180)}" rx="200" ry="70" fill="{c2}" opacity=".6"/>
   </g>
   <g>{band}</g>
   {far}{mid}
   {spikes}
   {shooting}
-
-  <!-- satellite crossing the sky -->
   <g class="sat"><g transform="scale(.9)">
-    <rect x="-16" y="-3" width="12" height="6" fill="#334155" stroke="{CYAN}" stroke-width=".6"/>
-    <rect x="4" y="-3" width="12" height="6" fill="#334155" stroke="{CYAN}" stroke-width=".6"/>
+    <rect x="-16" y="-3" width="12" height="6" fill="#334155" stroke="{c2}" stroke-width=".6"/>
+    <rect x="4" y="-3" width="12" height="6" fill="#334155" stroke="{c2}" stroke-width=".6"/>
     <rect x="-4" y="-4" width="8" height="8" rx="1.5" fill="#cbd5e1"/>
-    <circle cx="0" cy="-6" r="1.3" fill="{PINK}" class="blink"/></g></g>
-
-  <!-- gas giant with rings and a moon -->
-  <circle cx="{PX}" cy="{PY}" r="{PR + 26}" fill="url(#atmo)"/>
-  <ellipse cx="{PX}" cy="{PY}" rx="{PR + 150}" ry="40" fill="none" stroke="url(#ring)" stroke-width="10" opacity=".55" transform="rotate(12 {PX} {PY})"/>
-  <circle cx="{PX}" cy="{PY}" r="{PR}" fill="url(#planet)"/>
-  <rect x="{PX - PR}" y="{PY - PR}" width="{PR * 2}" height="{PR * 2}" fill="url(#bands)" clip-path="url(#pclip)"/>
-  <circle cx="{PX}" cy="{PY}" r="{PR}" fill="url(#planet)" opacity=".35"/>
-  <path d="M{PX - PR - 150} {PY} A{PR + 150} 40 0 0 0 {PX + PR + 150} {PY}" fill="none" stroke="url(#ring)" stroke-width="10" opacity=".9" transform="rotate(12 {PX} {PY})"/>
-  <path d="M{PX - PR - 125} {PY} A{PR + 125} 31 0 0 0 {PX + PR + 125} {PY}" fill="none" stroke="#c4b5fd" stroke-width="2" opacity=".5" transform="rotate(12 {PX} {PY})"/>
-  <g class="orbit"><circle cx="{PX - PR - 70}" cy="{PY - 60}" r="13" fill="url(#moon)"/></g>
+    <circle cx="0" cy="-6" r="1.3" fill="{c3}" class="blink"/></g></g>
+  {obj(1075, 415, pal)}
   {near}
-
-  <!-- HUD -->
   <g transform="translate(40 36)">
     <rect width="232" height="32" rx="16" fill="{PANEL}" fill-opacity=".7" stroke="{EDGE}"/>
     <circle cx="20" cy="16" r="5" fill="{LIME}"/><circle class="dot" cx="20" cy="16" r="5" fill="{LIME}"/>
@@ -209,10 +351,10 @@ def hero():
     <rect width="200" height="32" rx="16" fill="{PANEL}" fill-opacity=".7" stroke="{EDGE}"/>
     <text x="100" y="21" class="chip" text-anchor="middle">🔥 {S['streak']}d streak · Level {S['level']}</text>
   </g>
-  <text x="40" y="{H - 52}" class="hud">◉ SECTOR · OPEN-SOURCE</text>
-  <text x="40" y="{H - 34}" class="hud">RA 05h 35m · DEC −05° 23′ · EARTH</text>
-  <path d="M40 {H - 24}h170" stroke="{EDGE}"/><path d="M40 {H - 24}h60" stroke="{CYAN}" class="blink"/>
-
+  <text x="40" y="{H - 70}" class="hudb">◉ TODAY'S SKY · {escape(tname.upper())}</text>
+  <text x="40" y="{H - 52}" class="hud">SECTOR · {escape(sector)}</text>
+  <text x="40" y="{H - 34}" class="hud">STARDATE {date_txt} · NEW SKY EVERY DAY</text>
+  <path d="M40 {H - 24}h190" stroke="{EDGE}"/><path d="M40 {H - 24}h60" stroke="{c2}" class="blink"/>
   <text x="600" y="200" class="name g1">YOGENDER</text>
   <text x="600" y="200" class="name g2">YOGENDER</text>
   <text x="600" y="200" class="name" fill="url(#name)" filter="url(#glow)">YOGENDER</text>
@@ -220,7 +362,18 @@ def hero():
 </g>
 <rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="26" fill="none" stroke="{EDGE}"/>
 """
-    save("hero.svg", svg(W, H, inner, "Yogender — AI/ML Engineer · Full-Stack Builder"))
+    save("hero.svg", svg(W, H, inner, f"Yogender — AI/ML Engineer · Full-Stack Builder · today's sky: {tname}"))
+    # Point the README at a per-day URL so GitHub's image cache can't serve yesterday's sky.
+    readme = os.path.join(OUT, "..", "README.md")
+    try:
+        with open(readme, encoding="utf-8") as fh:
+            text = fh.read()
+        new = re.sub(r'src="\./assets/hero\.svg(\?d=\d+)?"', f'src="./assets/hero.svg?d={day}"', text)
+        if new != text:
+            with open(readme, "w", encoding="utf-8", newline="\n") as fh:
+                fh.write(new)
+    except FileNotFoundError:
+        pass
 
 
 # ───────────────────────────── TERMINAL ─────────────────────────────
