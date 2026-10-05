@@ -3,7 +3,7 @@
 
 <div align="center">
 
-<a href="https://yogender1.me"><img src="./assets/hero.svg?d=739894" width="100%" alt="Yogender — AI/ML Engineer · Full-Stack Builder" /></a>
+<a href="https://yogender1.me"><img src="./assets/live/hero-9d646348e9.svg" width="100%" alt="Yogender — AI/ML Engineer · Full-Stack Builder" /></a>
 
 <br/>
 
@@ -91,30 +91,33 @@
 
 <div align="center">
 
-<!-- The wall is redrawn by .github/workflows/sign-the-wall.yml whenever someone signs. -->
-<img src="./assets/wall.svg" width="100%" alt="People who have signed this profile" />
+<!-- Redrawn by .github/workflows/profile-bot.yml (wall.py) whenever someone joins. -->
+<img src="./assets/live/wall-445faf7ca2.svg" width="100%" alt="Everyone who joined this profile's galaxy, orbiting as planets" />
 
-<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=sign%3A%20add%20me%20to%20the%20wall&body=Just%20hit%20submit.%20A%20bot%20adds%20your%20avatar%20to%20the%20wall%20and%20closes%20this%20issue.">
-<img src="https://img.shields.io/badge/%E2%9C%8D%20sign%20the%20wall-8b5cf6?style=for-the-badge&labelColor=0b0d1a" alt="Sign the wall" />
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=sign%3A%20add%20me%20to%20the%20galaxy&body=Just%20hit%20submit.%20A%20bot%20puts%20your%20avatar%20in%20orbit%20and%20closes%20this%20issue.">
+<img src="https://img.shields.io/badge/%F0%9F%AA%90%20join%20the%20galaxy-8b5cf6?style=for-the-badge&labelColor=0b0d1a" alt="Join the galaxy" />
 </a>
 
-<sub>One click. A bot adds your avatar to the image above and closes the issue.<br/>
-No form, no account linking, nothing to install — you are just <i>on</i> someone's profile.</sub>
-
-</div>
+<sub>One click, then submit. A bot turns your avatar into a planet orbiting this profile, forever.</sub>
 
 <br/>
 <br/>
+<br/>
 
-<!-- Painted by .github/workflows/profile-bot.yml, one pixel per issue. -->
-<img src="./assets/place.svg" width="100%" alt="A shared pixel canvas anyone can paint on" />
+<!-- Community Connect Four: .github/scripts/c4.py, run by profile-bot.yml for "c4:" issues. -->
+<img src="./assets/live/c4-e1fe11e053.svg" width="100%" alt="Community Connect Four: everyone plays one shared game" />
 
-<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=place%3A%2024%2024%20cyan&body=Change%20the%20numbers%20in%20the%20title%20to%20the%20x%20and%20y%20you%20want%2C%20and%20the%20colour.%0APalette%3A%20violet%2C%20cyan%2C%20pink%2C%20lime%2C%20amber%2C%20teal%2C%20red%2C%20white%2C%20slate%2C%20black.%0A%0AThen%20just%20submit%20-%20a%20bot%20paints%20it%20and%20closes%20this.">
-<img src="https://img.shields.io/badge/%F0%9F%8E%A8%20paint%20a%20pixel-22d3ee?style=for-the-badge&labelColor=0b0d1a" alt="Paint a pixel" />
-</a>
+<b>Drop a piece — pick a column:</b><br/>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%201&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%201-f43f5e?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 1" /></a>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%202&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%202-fbbf24?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 2" /></a>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%203&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%203-f43f5e?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 3" /></a>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%204&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%204-fbbf24?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 4" /></a>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%205&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%205-f43f5e?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 5" /></a>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%206&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%206-fbbf24?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 6" /></a>
+<a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%207&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%207-f43f5e?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 7" /></a>
 
-<sub>Edit the coordinates in the issue title, hit submit, and that pixel is yours.<br/>
-One pixel every 10 minutes per person. Nothing here gets reverted — whatever it becomes, it stays.</sub>
+<sub>Click a column, hit submit, and a bot drops your piece for whichever team is up.<br/>
+You can't move twice in a row, so send this to a friend and make them play the next move. 👀</sub>
 
 </div>
 

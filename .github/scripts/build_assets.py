@@ -8,7 +8,11 @@ import json
 import os
 import random
 import re
+import sys
 from xml.sax.saxutils import escape
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from live import publish  # noqa: E402
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "..", "assets")
 
@@ -362,18 +366,9 @@ def hero():
 </g>
 <rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="26" fill="none" stroke="{EDGE}"/>
 """
-    save("hero.svg", svg(W, H, inner, f"Yogender — AI/ML Engineer · Full-Stack Builder · today's sky: {tname}"))
-    # Point the README at a per-day URL so GitHub's image cache can't serve yesterday's sky.
-    readme = os.path.join(OUT, "..", "README.md")
-    try:
-        with open(readme, encoding="utf-8") as fh:
-            text = fh.read()
-        new = re.sub(r'src="\./assets/hero\.svg(\?d=\d+)?"', f'src="./assets/hero.svg?d={day}"', text)
-        if new != text:
-            with open(readme, "w", encoding="utf-8", newline="\n") as fh:
-                fh.write(new)
-    except FileNotFoundError:
-        pass
+    body = svg(W, H, inner, f"Yogender — AI/ML Engineer · Full-Stack Builder · today's sky: {tname}")
+    save("hero.svg", body)
+    publish("hero", body.strip() + "\n")  # new file name per sky, so no browser shows a stale one
 
 
 # ───────────────────────────── TERMINAL ─────────────────────────────
