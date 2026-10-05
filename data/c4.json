@@ -48,7 +48,7 @@
     "."
    ],
    [
-    ".",
+    "R",
     ".",
     ".",
     ".",
@@ -57,8 +57,16 @@
     "."
    ]
   ],
-  "turn": "R",
-  "moves": [],
+  "turn": "Y",
+  "moves": [
+   {
+    "by": "yogender-ai",
+    "col": 0,
+    "row": 5,
+    "team": "R",
+    "at": "2026-10-05T16:06:36+05:30"
+   }
+  ],
   "winner": null,
   "line": []
  },
@@ -67,5 +75,10 @@
   "Y": 0,
   "draw": 0
  },
- "players": {}
+ "players": {
+  "yogender-ai": {
+   "moves": 1,
+   "wins": 0
+  }
+ }
 }
