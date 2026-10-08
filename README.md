@@ -105,7 +105,7 @@
 <br/>
 
 <!-- Community Connect Four: .github/scripts/c4.py, run by profile-bot.yml for "c4:" issues. -->
-<img src="./assets/live/c4-50dfbc7b18.svg" width="100%" alt="Community Connect Four: everyone plays one shared game" />
+<img src="./assets/live/c4-f648dffc01.svg" width="100%" alt="Community Connect Four: everyone plays one shared game" />
 
 <b>Drop a piece — pick a column:</b><br/>
 <a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=c4%3A%20drop%201&body=Just%20hit%20submit.%20A%20bot%20drops%20your%20piece%2C%20redraws%20the%20board%20and%20closes%20this%20issue."><img src="https://img.shields.io/badge/%E2%AC%87%201-f43f5e?style=for-the-badge&labelColor=0b0d1a" alt="Drop in column 1" /></a>

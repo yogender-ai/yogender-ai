@@ -50,14 +50,14 @@
    [
     "R",
     "Y",
-    ".",
+    "R",
     ".",
     ".",
     ".",
     "."
    ]
   ],
-  "turn": "R",
+  "turn": "Y",
   "moves": [
    {
     "by": "yogender-ai",
@@ -72,6 +72,13 @@
     "row": 5,
     "team": "Y",
     "at": "2026-10-05T23:49:03+05:30"
+   },
+   {
+    "by": "SatadeepKar",
+    "col": 2,
+    "row": 5,
+    "team": "R",
+    "at": "2026-10-08T17:06:16+05:30"
    }
   ],
   "winner": null,
@@ -88,6 +95,10 @@
    "wins": 0
   },
   "Yuvika687": {
+   "moves": 1,
+   "wins": 0
+  },
+  "SatadeepKar": {
    "moves": 1,
    "wins": 0
   }
