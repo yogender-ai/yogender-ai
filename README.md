@@ -92,7 +92,7 @@
 <div align="center">
 
 <!-- Redrawn by .github/workflows/profile-bot.yml (wall.py) whenever someone joins. -->
-<img src="./assets/live/wall-445faf7ca2.svg" width="100%" alt="Everyone who joined this profile's galaxy, orbiting as planets" />
+<img src="./assets/live/wall-8908966efd.svg" width="100%" alt="Everyone who joined this profile's galaxy, orbiting as planets" />
 
 <a href="https://github.com/yogender-ai/yogender-ai/issues/new?title=sign%3A%20add%20me%20to%20the%20galaxy&body=Just%20hit%20submit.%20A%20bot%20puts%20your%20avatar%20in%20orbit%20and%20closes%20this%20issue.">
 <img src="https://img.shields.io/badge/%F0%9F%AA%90%20join%20the%20galaxy-8b5cf6?style=for-the-badge&labelColor=0b0d1a" alt="Join the galaxy" />
