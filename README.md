@@ -3,7 +3,7 @@
 
 <div align="center">
 
-<a href="https://yogender1.me"><img src="./assets/live/hero-1d15c78a14.svg" width="100%" alt="Yogender — AI/ML Engineer · Full-Stack Builder" /></a>
+<a href="https://yogender1.me"><img src="./assets/live/hero-00058d4552.svg" width="100%" alt="Yogender — AI/ML Engineer · Full-Stack Builder" /></a>
 
 <br/>
 
